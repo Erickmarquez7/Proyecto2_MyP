@@ -1,22 +1,9 @@
-public class Comida extends TipoComida{
+public abstract class Comida{
 
-	@Override
-	public Receta busca(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public abstract String mostrarComida();
 
-	@Override
-	public Receta busca(Ingrediente nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public abstract Comida buscarReceta(String nombre);
 
-	@Override
-	public Receta busca(int tiempo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    public abstract void agregaReceta(Comida comida);
 
 }
