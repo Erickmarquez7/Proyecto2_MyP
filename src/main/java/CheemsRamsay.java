@@ -1,16 +1,17 @@
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class CheemsRamsay{
 
     Buscador buscador;
-    
+
     public void setBuscador(Buscador buscador){
         this.buscador=buscador;
     }
 
 
-    public Comida busca(String cadena){
-        return buscador.busca(cadena);
+    public LinkedList<Receta> busca(String cadena){
+        return buscador.busca(cadena, null);
     }
 
 

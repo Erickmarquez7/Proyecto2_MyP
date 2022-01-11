@@ -1,4 +1,8 @@
+import java.util.LinkedList;
+
 public interface Buscador{
 
-    public Comida busca(String cadena);
+    public LinkedList<Receta> busca(String cadena, LinkedList<Receta> base);
+
+    public String mostrarBusqueda();
 }

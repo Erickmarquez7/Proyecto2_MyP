@@ -1,7 +1,7 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class Receta extends Comida implements Registro{
+public class Receta implements Registro{
 
     private String nombre;
     private LinkedList<Ingrediente> ingredientes;
@@ -142,20 +142,20 @@ public class Receta extends Comida implements Registro{
         this.tiempo = receta.tiempo;
     }
 
-    @Override
+    
     public String mostrarComida() {
         return toString();
     }
 
-    @Override
-    public Comida buscarReceta(String nombre) {
+    
+    public Receta buscarReceta(String nombre) {
         // TODO Auto-generated method stub
         return null;
     }
 
 
-    @Override
-    public void agregaReceta(Comida comida) {
+    
+    public void agregaReceta(Receta comida) {
         // TODO Auto-generated method stub
         
     }
