@@ -87,7 +87,7 @@ public class VistaBuscador extends JFrame{
     }
 
 
-    private void initPantalla(){
+    public void initPantalla(){
         /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
         el thread que maneja la ventana realmente termine su ejecucion*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

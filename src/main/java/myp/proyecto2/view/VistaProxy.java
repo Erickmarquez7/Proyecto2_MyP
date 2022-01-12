@@ -4,8 +4,6 @@ package myp.proyecto2.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-//import java.awt.*;
-//import java.awt.event.*;
 
 public class VistaProxy extends JFrame{
 
@@ -36,7 +34,7 @@ public class VistaProxy extends JFrame{
         this.getContentPane().setBackground(Color.RED);
     }
 
-    private void initDisplay(){
+    public void initDisplay(){
     	frame = new JFrame("Cheems Ramsay");
         //frame.setBackground(Color.CYAN);
         frame.setSize(800, 600);
@@ -77,7 +75,7 @@ public class VistaProxy extends JFrame{
         frame.add(contrafield);
     }
 
-    private void initBoton(){
+    public void initBoton(){
     	//Se agrega un boton con un mensaje
         boton1 = new JButton("OK");
         //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
@@ -93,7 +91,7 @@ public class VistaProxy extends JFrame{
     }
 
 
-    private void initPantalla(){
+    public void initPantalla(){
         /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
         el thread que maneja la ventana realmente termine su ejecucion*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

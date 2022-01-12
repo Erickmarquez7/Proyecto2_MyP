@@ -1,8 +1,8 @@
-///package myp.proyecto2.view;
+package myp.proyecto2.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+
 public class VistaReceta extends JFrame{
     private JFrame frame;
 
@@ -10,7 +10,9 @@ public class VistaReceta extends JFrame{
 
     private int cantidad;
 
-//    private JButton botonVerRecetas;
+    private JButton pedir;
+
+//    private JButton pedir;
 //    private JButton botonBuscarRecetas;
 
     public VistaReceta(){
@@ -19,7 +21,7 @@ public class VistaReceta extends JFrame{
         initPantalla();
     }
 
-    public <in> void initDisplay(){
+    public void initDisplay(){
         frame = new JFrame("Cheems Ramsay");
         frame.setBackground(Color.CYAN);
         frame.setSize(800, 600);
@@ -27,16 +29,7 @@ public class VistaReceta extends JFrame{
 
         JScrollPane scroolbar = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         frame.setContentPane(scroolbar);
-        /*
-        texto = new JLabel("La receta a preparar es:\n");
-        //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
-        //el primer parametro lo mueve en linea horizontal a la derecha
-        //el segundo en vertical abajo
-        //
-        texto.setFont(new Font("Courier", Font.BOLD, 20));
-        texto.setBounds(150,10,600,100);
-        frame.add(texto);*/
-
+        
 
         String nombre = "Con cebolla y arroz";
         String[] ings = new String[200];
@@ -87,23 +80,23 @@ public class VistaReceta extends JFrame{
     }
 
     public void initBoton(){
-        /*
-        botonVerRecetas = new JButton("Ver todas las recetas");
-        botonVerRecetas.setBounds(200,250,400,50);
-        botonVerRecetas.setFont(new Font("Courier", Font.BOLD, 20));
+    	//Se agrega un boton con un mensaje
+        pedir = new JButton("Enviar a domicilio");
+        //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
+        pedir.setBounds(550,400,150,50);
+        pedir.setFont(new Font("Courier", Font.BOLD, 30));
         //Se agrega al frame
-        frame.add(botonVerRecetas);
+        frame.add(pedir);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-  /*      botonVerRecetas.addActionListener(e -> {
-            System.out.println("Ver todas las recetas");
+        pedir.addActionListener(e -> {
+            System.out.println("Envio a domicilio hecho");
         });
 
-*/
 
     }
 
-    private void initPantalla(){
+    public void initPantalla(){
         /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
         el thread que maneja la ventana realmente termine su ejecucion*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -114,7 +107,7 @@ public class VistaReceta extends JFrame{
         frame.setVisible(true);
     }
 
-      public static void main(String[] ar) {
+    /*public static void main(String[] ar) {
         VistaReceta interfaz1 = new VistaReceta();
-    }
+    }*/
 }

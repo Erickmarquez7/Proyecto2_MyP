@@ -11,6 +11,7 @@ public class VistaPrincipal extends JFrame{
     private JButton botonVerRecetas;
     private JButton botonBuscarRecetas;
 
+    
     public VistaPrincipal(){
         initDisplay();
         initBoton();
@@ -33,17 +34,13 @@ public class VistaPrincipal extends JFrame{
         frame.add(texto);
     }
 
+
     public void initBoton(){
         botonVerRecetas = new JButton("Ver todas las recetas");
         botonVerRecetas.setBounds(200,250,400,50);
         botonVerRecetas.setFont(new Font("Courier", Font.BOLD, 20));
         //Se agrega al frame
         frame.add(botonVerRecetas);
-        /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
-        botonVerRecetas.addActionListener(e -> {
-            System.out.println("Ver todas las recetas");
-        });
 
 
         botonBuscarRecetas = new JButton("Buscar recetas");
@@ -51,16 +48,17 @@ public class VistaPrincipal extends JFrame{
         botonBuscarRecetas.setBounds(200,300,400,50);
         //Se agrega al frame
         frame.add(botonBuscarRecetas);
-        /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
-        botonBuscarRecetas.addActionListener(e -> {
-            System.out.println("Buscar recetas las recetas");
-        });
 
     }
 
+    public void function(ActionListener verRecetas, ActionListener buscarRecetas){
+        /*Se le asigna un ActionListener que permitira actuar
+        de cierta forma cuando se presione el boton*/
+        botonVerRecetas.addActionListener(verRecetas);
+        botonBuscarRecetas.addActionListener(buscarRecetas);
+    }
 
-    private void initPantalla(){
+    public void initPantalla(){
         /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
         el thread que maneja la ventana realmente termine su ejecucion*/
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +69,7 @@ public class VistaPrincipal extends JFrame{
         frame.setVisible(true);
     }
 
-      public static void main(String[] ar) {
+    /*  public static void main(String[] ar) {
         VistaPrincipal interfaz1 = new VistaPrincipal();
-    }
+    }*/
 }
