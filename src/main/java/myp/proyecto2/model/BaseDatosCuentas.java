@@ -5,16 +5,16 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class BaseDatosChefs extends BaseDatos<Chef>{
+public class BaseDatosCuentas extends BaseDatos<Cuenta>{
 
     @Override
-    public Chef creaRegistro(){
-	    return new Chef(null, null, 0);
+    public Cuenta creaRegistro(){
+        return new Cuenta(null, null, 0);
     }
 
     public void carga(){
         try{
-            FileInputStream file = new FileInputStream("../data/Chefs.txt");
+            FileInputStream file = new FileInputStream("../data/Cuentas.txt");
             InputStreamReader fileIn = new InputStreamReader(file);
             BufferedReader in = new BufferedReader(fileIn);
             super.carga(in);
@@ -24,4 +24,3 @@ public class BaseDatosChefs extends BaseDatos<Chef>{
         }
     }
 }
-

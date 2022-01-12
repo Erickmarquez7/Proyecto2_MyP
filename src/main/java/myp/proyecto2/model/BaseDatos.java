@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 import java.util.LinkedList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -53,6 +55,11 @@ public abstract class BaseDatos<R extends Registro> {
 	    	agregaRegistro(r);
 		}
     }
+
+	public void paraTodos(AccionRegistro<R> accion){
+		for(R r : base)
+			accion.actua(r);
+	}
 
     public abstract R creaRegistro();
 }
