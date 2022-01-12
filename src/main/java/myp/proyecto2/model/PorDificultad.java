@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 import java.util.LinkedList;
 
 public class PorDificultad implements Buscador{

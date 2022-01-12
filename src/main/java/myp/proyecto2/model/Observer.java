@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 public interface Observer {
 
     public void agrega(Receta receta);

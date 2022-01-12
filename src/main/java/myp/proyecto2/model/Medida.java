@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 public enum Medida {
     OZ,
     TZ,

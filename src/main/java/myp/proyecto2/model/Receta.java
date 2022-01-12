@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 

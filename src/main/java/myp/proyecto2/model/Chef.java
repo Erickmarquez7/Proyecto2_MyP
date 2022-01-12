@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 public class Chef implements Registro, Observer{
 
     private String nombre;

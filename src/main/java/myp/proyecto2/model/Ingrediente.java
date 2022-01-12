@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 public class Ingrediente {
     private String nombre;
     private Medida medida;

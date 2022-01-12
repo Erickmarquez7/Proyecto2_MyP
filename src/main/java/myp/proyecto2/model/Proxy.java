@@ -1,3 +1,5 @@
+package myp.proyecto2.model;
+
 public class Proxy implements IProxy{
     private Cuenta cuenta;
 

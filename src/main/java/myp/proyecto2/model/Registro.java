@@ -1,3 +1,4 @@
+package myp.proyecto2.model;
 /**
  * Interfaz para registros. Los registros deben de poder serializarse a y
  * deserializarse de una línea de texto. También deben poder determinar si sus
