@@ -14,7 +14,7 @@
     Proyecto 2 de Modelado y Programación: 
   </description>
   <organization>
-    <name>Fernando López Balcazar</name>
+    <name>Ana Valeria Deloya Andrade, Erick Bernal Márquez, Fernando López Balcazar</name>
     <url>https://github.com/FernandoLopBa/Proyecto2_MyP</url>
   </organization>
 
@@ -68,7 +68,7 @@
 	<configuration>
 	  <archive>
 	    <manifest>
-	      <mainClass>myp.proyecto2.model</mainClass>
+	      <mainClass>myp.proyecto2.controller.Controlador</mainClass>
 	    </manifest>
 	  </archive>
 	</configuration>
@@ -123,13 +123,4 @@
 
     </plugins>
   </reporting>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-    </dependency>
-  </dependencies>
-
 </project>
