@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class VistaProxy extends JFrame{
+public class VistaProxy extends JPanel{
 
 	/*Este es el canvas donde se agregan todos los elementos 
     a desplegar en la interfaz.*/
@@ -30,8 +30,8 @@ public class VistaProxy extends JFrame{
     public VistaProxy(){
     	initDisplay();
     	initBoton();
-    	initPantalla();
-        this.getContentPane().setBackground(Color.RED);
+    	//initPantalla();
+        //this.getContentPane().setBackground(Color.RED);
     }
 
     public void initDisplay(){
@@ -71,7 +71,7 @@ public class VistaProxy extends JFrame{
         en lugar de caracteres*/
         contrafield=new JPasswordField();
         contrafield.setBounds(300,280,400,50);
-        contrafield.setFont(new Font("Slab Serif", Font.ITALIC, 20));
+        contrafield.setFont(new Font("Arial", Font.PLAIN, 20));
         frame.add(contrafield);
     }
 
@@ -80,12 +80,13 @@ public class VistaProxy extends JFrame{
         boton1 = new JButton("OK");
         //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
         boton1.setBounds(550,400,150,50);
-        boton1.setFont(new Font("Courier", Font.BOLD, 30));
+        boton1.setFont(new Font("Arial", Font.BOLD, 30));
         //Se agrega al frame
         frame.add(boton1);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
         boton1.addActionListener(e -> {
+	    System.out.println(textofield.getText());
             System.out.println("Prozy");
         });
     }

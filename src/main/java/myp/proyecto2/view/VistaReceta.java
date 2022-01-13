@@ -1,9 +1,11 @@
 package myp.proyecto2.view;
 
+import java.util.LinkedList;
+import myp.proyecto2.model.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class VistaReceta extends JFrame{
+public class VistaReceta extends JPanel{
     private JFrame frame;
 
     private JLabel texto;
@@ -12,13 +14,17 @@ public class VistaReceta extends JFrame{
 
     private JButton pedir;
 
+    private Receta receta;
+
 //    private JButton pedir;
 //    private JButton botonBuscarRecetas;
 
-    public VistaReceta(){
-        initDisplay();
-        initBoton();
-        initPantalla();
+    public VistaReceta(){}
+    public VistaReceta(Receta receta){
+        this.receta = receta;
+        //initDisplay();
+        //initBoton();
+//        initPantalla();
     }
 
     public void initDisplay(){
@@ -27,55 +33,70 @@ public class VistaReceta extends JFrame{
         frame.setSize(800, 600);
         frame.setLocation(200,200);
 
-        JScrollPane scroolbar = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        frame.setContentPane(scroolbar);
+        JScrollBar scrollbar = new JScrollBar(JScrollBar.VERTICAL);
+        frame.setContentPane(scrollbar);
         
+        //Se muestra el nombre
+        JLabel name = new JLabel(receta.getNombre());
+        name.setFont(new Font("Arial", Font.BOLD, 20));
+        name.setBounds(100,30,600,30);
+        frame.add(name);
 
-        String nombre = "Con cebolla y arroz";
-        String[] ings = new String[200];
-        for(int j = 0; j < 200; j++)
-            ings[j] = String.format("Ingrediente %d", j);
-        int tiempo = 150;
-        int dificultad = 3;
-        //String preparacion =  "poner un kilo de hueva a preparar";
+        // Se añaden los ingredintes
+        JLabel ingrediente = new JLabel("Ingredintes:");
+        ingrediente.setFont(new Font("Arial", Font.BOLD,20));
+        ingrediente.setBounds(100,60,600,30);
+        frame.add(ingrediente);
 
-        int altura =110;
-        JLabel neim = new JLabel("Nombre : " + nombre);
-        neim.setFont(new Font("Courier", Font.BOLD, 20));
-        neim.setBounds(100,50,400,30);
-        frame.add(neim);
-        neim = new JLabel("Ingredientes:");
-        neim.setBounds(100,80,200,20);
-        neim.setFont(new Font("Courier", Font.BOLD, 20));
-        frame.add(neim);
-        for(String ing : ings){
-            JLabel ingrediente = new JLabel("* "+ing);
-            ingrediente.setFont(new Font("Courier", Font.BOLD,20));
+        int altura = 10;
+        for(Ingrediente i : receta.getIngredientes()){
+            ingrediente = new JLabel("* " + i.toString());
+            ingrediente.setFont(new Font("Courier", Font.PLAIN,18));
             ingrediente.setBounds(150,altura,200,20);
             frame.add(ingrediente);
             altura += 20;
         }
-        neim = new JLabel("Tiempo:");
-        neim.setBounds(100,altura, 200,30);
-        neim.setFont(new Font("Courier", Font.BOLD, 20));
-        frame.add(neim);
-        neim = new JLabel(String.format("%d mins",tiempo));
-        neim.setBounds(200,altura, 200,30);
-        neim.setFont(new Font("Courier", Font.ITALIC, 20));
-        frame.add(neim);
-        altura += 30;
-        neim = new JLabel("Dificultad: ");
-        neim.setBounds(100,altura, 200,30);
-        neim.setFont(new Font("Courier", Font.BOLD, 20));
-        frame.add(neim);
-        
-        for(int i = 0; i < dificultad; i++){
-            JLabel estrella = new JLabel("★");
-            estrella.setFont(new Font("Courier", Font.BOLD,20));
-            estrella.setBounds(250+i*30,altura,30,20);
-            frame.add(estrella);
 
+        // Se añaden las instrucciones
+        JLabel instruccion = new JLabel("Instrucciones:");
+        instruccion.setFont(new Font("Arial", Font.BOLD, 20));
+        instruccion.setBounds(100,altura+10,600,30);
+        frame.add(instruccion);
+        altura += 40;
+
+        for(String i : receta.getInstrucciones()){
+            instruccion = new JLabel("* " + i);
+            instruccion.setFont(new Font("Courier", Font.PLAIN,18));
+            instruccion.setBounds(150,altura,200,20);
+            frame.add(instruccion);
+            altura += 20;
         }
+
+        // Se añade el tiempo de preparación
+        JLabel tiempo = new JLabel("Tiempo: ");
+        tiempo.setFont(new Font("Arial", Font.BOLD, 20));
+        tiempo.setBounds(100, altura+10, 200,30);
+        frame.add(tiempo);
+
+        tiempo = new JLabel(receta.getTiempoString());
+        tiempo.setBounds(180,altura+10,200,30);
+        tiempo.setFont(new Font("Courier", Font.PLAIN, 18));
+        frame.add(tiempo);
+        altura += 40;
+
+        // Se añade la dificultad
+        JLabel dificultad = new JLabel("Dificulad: ");
+        dificultad.setFont(new Font("Arial", Font.BOLD, 20));
+        dificultad.setBounds(100,altura,200,30);
+        frame.add(dificultad);
+
+        for(int i = 0; i < receta.getDificultad(); i++){
+            dificultad = new JLabel("★");
+            dificultad.setFont(new Font("Courier", Font.BOLD, 20));
+            dificultad.setBounds(250 + i*30, altura, 30,20);
+            frame.add(dificultad);
+        }
+
         
     }
 

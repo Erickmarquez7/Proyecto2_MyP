@@ -4,7 +4,7 @@ package myp.proyecto2.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-public class VistaBuscador extends JFrame{
+public class VistaBuscador extends JPanel{
     private JFrame frame;
 
     private JLabel texto;
@@ -17,7 +17,7 @@ public class VistaBuscador extends JFrame{
     public VistaBuscador(){
         initDisplay();
         initBoton();
-        initPantalla();
+        //initPantalla();
     }
 
     public void initDisplay(){
