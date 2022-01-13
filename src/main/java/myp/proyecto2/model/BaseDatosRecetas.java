@@ -12,15 +12,18 @@ public class BaseDatosRecetas extends BaseDatos<Receta>{
 	    return new Receta(null, "", "", 0,0);
     }
 
-    public void carga(){
+    @Override
+    public void carga(String directorio){
         try{
-            FileInputStream file = new FileInputStream("../data/Recetas.txt");
+            FileInputStream file = new 
+		        FileInputStream(directorio + "Recetas.txt");
             InputStreamReader fileIn = new InputStreamReader(file);
             BufferedReader in = new BufferedReader(fileIn);
             super.carga(in);
         }catch (IOException ioe){
-            System.out.println("Error al acceder a la base :(");
+            System.out.println("Error al acceder a la base 1 :(");
             System.exit(0);
         }
     }
+
 }

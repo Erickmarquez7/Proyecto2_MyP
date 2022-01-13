@@ -72,6 +72,26 @@ public class Receta implements Registro{
         return instrucciones;
     }
 
+    public String getNombre(){
+        return nombre;
+    }
+
+    public LinkedList<Ingrediente> getIngredientes(){
+        return ingredientes;
+    }
+
+    public LinkedList<String> getInstrucciones(){
+        return instrucciones;
+    }
+
+    public int getTiempo(){
+        return tiempo;
+    }
+
+    public int getDificultad(){
+        return dificultad;
+    }
+
     @Override
     public String serializa() {
         return String.format("%s/%s/%s/%d/%d",nombre,serializaIngredientes(),
@@ -160,6 +180,15 @@ public class Receta implements Registro{
     public void agregaReceta(Receta comida) {
         // TODO Auto-generated method stub
         
+    }
+
+    public String getTiempoString(){
+        int horas = tiempo/60;
+        String plural = horas == 1 ? "hr" : "hrs";
+        if(horas > 0)
+            return String.format("%d %s %d min\n", horas, plural, tiempo%60);
+        else
+            return String.format("%d min\n", tiempo);
     }
 
     @Override

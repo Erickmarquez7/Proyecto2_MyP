@@ -12,9 +12,11 @@ public class BaseDatosCuentas extends BaseDatos<Cuenta>{
         return new Cuenta(null, null, 0);
     }
 
-    public void carga(){
+    @Override
+    public void carga(String directorio){
         try{
-            FileInputStream file = new FileInputStream("../data/Cuentas.txt");
+            FileInputStream file = new
+		        FileInputStream(directorio + "Cuentas.txt");
             InputStreamReader fileIn = new InputStreamReader(file);
             BufferedReader in = new BufferedReader(fileIn);
             super.carga(in);

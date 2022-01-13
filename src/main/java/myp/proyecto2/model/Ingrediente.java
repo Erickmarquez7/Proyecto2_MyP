@@ -4,21 +4,24 @@ public class Ingrediente {
     private String nombre;
     private Medida medida;
     private double cantidad;
-    private int porciones;
 
     public Ingrediente(String nombre, Medida medida, double cantidad, int porciones){
         this.nombre = nombre;
         this.medida = medida;
         this.cantidad = cantidad;
-        this.porciones = porciones;
     }
 
     public Ingrediente(String ingredienteSer){
         deserializa(ingredienteSer);
     }
 
+    @Override
+    public String toString(){
+	return String.format("%s   %.2 %s", nombre, cantidad, medida.toString());
+    }
+
     public String serializa(){
-        return String.format("%s-%s-%.3f-%d", nombre, medida.toString(), cantidad, porciones);
+        return String.format("%s-%s-%.3f", nombre, medida.toString(), cantidad);
     }
 
     public void deserializa(String registro){
@@ -34,7 +37,6 @@ public class Ingrediente {
             this.nombre = campos[0];
             this.medida = Medida.valueOf(campos[1]);
             this.cantidad = Double.parseDouble(campos[2]);
-            this.porciones = Integer.parseInt(campos[3]);
         }catch (NumberFormatException nfe){
             throw new ExcepcionRegistroInvalido("Registro no válido.");
         }

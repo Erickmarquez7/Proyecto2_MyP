@@ -2,24 +2,26 @@ package myp.proyecto2.model;
 
 import java.util.LinkedList;
 
-public class Recetario implements Sujeto{
+public abstract class Recetario implements Sujeto{
 
 	private BaseDatosRecetas recetario;
 	private BaseDatosChefs chefs;
 
-	public Recetario(){
+	public Recetario(String directorio){
 		recetario = new BaseDatosRecetas();
-		recetario.carga();
+		chefs = new BaseDatosChefs();
+		recetario.carga(directorio);
+		chefs.carga(directorio);
 	}
 
 	public void agrega(Receta registro){
 		recetario.agregaRegistro(registro);
-		actualiza();
+		actualiza(registro);
 	}
 
 	@Override
-	public void actualiza() {
-		
+	public void actualiza(Receta receta) {
+	    for(Chef c : chefs.getRegistros())
+		c.notifica();
 	}
-
 }

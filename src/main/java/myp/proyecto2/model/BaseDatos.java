@@ -42,6 +42,8 @@ public abstract class BaseDatos<R extends Registro> {
 		}
     }
 
+	public abstract void carga(String directorio);
+
     public void carga(BufferedReader in) throws IOException{
 		limpia();
 		String c;
@@ -55,11 +57,6 @@ public abstract class BaseDatos<R extends Registro> {
 	    	agregaRegistro(r);
 		}
     }
-
-	public void paraTodos(AccionRegistro<R> accion){
-		for(R r : base)
-			accion.actua(r);
-	}
 
     public abstract R creaRegistro();
 }

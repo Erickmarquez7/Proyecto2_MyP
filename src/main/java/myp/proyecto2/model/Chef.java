@@ -75,21 +75,16 @@ public class Chef implements Registro, Observer{
     }
 
 	@Override
-	public void agrega(Receta receta) {
-		// TODO Auto-generated method stub
-		
+	public void agrega(Recetario receta) {
 	}
 
 	@Override
-	public void elimina(Receta receta) {
-		// TODO Auto-generated method stub
-		
+	public void elimina(Recetario receta) {
 	}
 
 	@Override
 	public void notifica() {
-		// TODO Auto-generated method stub
-		
+        System.out.println(String.format("%s, se ha añadido una receta al recetario, te recomendamos revisarla!!!",nombre));		
 	}
     
 }
