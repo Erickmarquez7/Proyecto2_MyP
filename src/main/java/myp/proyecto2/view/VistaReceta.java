@@ -1,16 +1,17 @@
 package myp.proyecto2.view;
 
-import java.util.LinkedList;
+//import java.util.LinkedList;
 import myp.proyecto2.model.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class VistaReceta extends JPanel{
     private JFrame frame;
 
-    private JLabel texto;
+//    private JLabel texto;
 
-    private int cantidad;
+//    private int cantidad;
 
     private JButton pedir;
 
@@ -19,13 +20,25 @@ public class VistaReceta extends JPanel{
 //    private JButton pedir;
 //    private JButton botonBuscarRecetas;
 
-    public VistaReceta(){}
+    public VistaReceta(){
+        initDisplay();
+        initBoton();
+        frame.setLayout(null);
+    }
+
+
     public VistaReceta(Receta receta){
         this.receta = receta;
-        //initDisplay();
-        //initBoton();
-//        initPantalla();
+    
+        initDisplay();
+        initBoton();
+        frame.setLayout(null);
     }
+
+    public void setReceta(Receta receta){
+        this.receta=receta;
+    }
+
 
     public void initDisplay(){
         frame = new JFrame("Cheems Ramsay");
@@ -49,6 +62,7 @@ public class VistaReceta extends JPanel{
         frame.add(ingrediente);
 
         int altura = 10;
+        //cambiar por while it
         for(Ingrediente i : receta.getIngredientes()){
             ingrediente = new JLabel("* " + i.toString());
             ingrediente.setFont(new Font("Courier", Font.PLAIN,18));
@@ -64,6 +78,7 @@ public class VistaReceta extends JPanel{
         frame.add(instruccion);
         altura += 40;
 
+        //cambiar por while con it
         for(String i : receta.getInstrucciones()){
             instruccion = new JLabel("* " + i);
             instruccion.setFont(new Font("Courier", Font.PLAIN,18));
@@ -110,25 +125,16 @@ public class VistaReceta extends JPanel{
         frame.add(pedir);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-        pedir.addActionListener(e -> {
-            System.out.println("Envio a domicilio hecho");
-        });
-
 
     }
 
-    public void initPantalla(){
-        /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
-        el thread que maneja la ventana realmente termine su ejecucion*/
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*Esta linea determina que toda la disposicion de los elementos
-        (donde se ubicaran) depende completamente de nosotros.*/
-        frame.setLayout(null);
-        //Se asigna al frame como visible
-        frame.setVisible(true);
+    
+    public void setVisible(boolean bln){
+        frame.setVisible(bln);
     }
 
-    /*public static void main(String[] ar) {
-        VistaReceta interfaz1 = new VistaReceta();
-    }*/
+
+    public void function(ActionListener prox){
+            pedir.addActionListener(prox);
+    }
 }

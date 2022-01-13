@@ -27,4 +27,23 @@ public enum Medida {
                 return null;
         }
     }
+
+    public String valor(){
+	switch(this){
+	    case OZ:
+		return "OZ";
+	    case TZ:
+		return "TZ";
+	    case G:
+		return "G";
+	    case ML:
+		return "ML";
+	    case KG:
+		return "KG";
+	    case PZ:
+		return "PZ";
+	    default:
+		return null;
+	}
+    }
 }

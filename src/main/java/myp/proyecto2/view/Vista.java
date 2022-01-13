@@ -1,47 +1,79 @@
 package myp.proyecto2.view;
-//import javax.swing.*;
-//import java.awt.*;
-//import java.awt.event.*;
-import javax.swing.*;
-
 import myp.proyecto2.controller.Controlador;
-import java.awt.*;
 
-
-public class Vista extends JFrame{
+public class Vista {
     
-    private CardLayout vistas;
-
     public Vista(){
-        super("Cheems Ramsay");
-        vistas = new CardLayout();
         VistaPrincipal principal = new VistaPrincipal();
         VistaBuscador buscador = new VistaBuscador();
         VistaMuestra muestra = new VistaMuestra();
+
+
         VistaProxy proxy = new VistaProxy();
         VistaReceta receta = new VistaReceta();
 
-
-        setLayout(vistas);
-        new Controlador(principal, muestra, buscador, proxy, receta);
-//
-//
-        add(principal, "principal");
-        add(muestra, "muestra");
-        add(buscador, "buscador");
-
-        add(proxy, "proxy");
-        add(receta,"receta");
+        VistaUsuario usuario = new VistaUsuario();
+        VistaAnade anade = new VistaAnade();
 
 
-        principal.function(e -> {vistas.show(Vista.this.getContentPane(), "muestra");
-        System.out.println("Me quiero morir");}
-        , e -> vistas.show(Vista.this.getContentPane(), "buscador"));
 
-        setSize(1200, 700);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        principal.function(e -> {
+            System.out.println("Ver todas las recetas");
+            muestra.setVisible(true);}, 
 
+            e -> {
+                System.out.println("Buscar las recetas");
+                buscador.setVisible(true);},
+
+            e -> {
+                System.out.println("Suscribir usuario");
+                usuario.setVisible(true);},
+
+            e -> {
+                System.out.println("Añadir recetas");
+                anade.setVisible(true);}
+            
+        );
+
+
+        buscador.function(e -> {
+            System.out.println("Buscar por Nombre");//
+            //
+            receta.setVisible(true);}, 
+
+            e -> {
+            System.out.println("Buscar por Dificultad");
+            muestra.setVisible(true);}, 
+
+            e -> {
+            System.out.println("Buscar por Tiempo");
+            muestra.setVisible(true);}, 
+
+            e -> {
+            System.out.println("Buscar por Ingredientes");
+            muestra.setVisible(true);}
+        );        
+
+
+        //muestra.function();
+
+
+        receta.function(e -> {
+            System.out.println("Proxy");
+            proxy.setVisible(true);}
+        );
+
+
+        usuario.function(e -> {
+            System.out.println("Usuario agregado");
+            muestra.setVisible(true);}
+        );
+
+        //anade.function();
+
+
+
+        new Controlador(principal, muestra, buscador, proxy, receta, usuario, anade);
     }
-   
+
 }

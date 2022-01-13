@@ -1,13 +1,15 @@
 package myp.proyecto2.view;
 
-//Bibliotecas para la ventana y para eventos.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class VistaProxy extends JPanel{
 
-	/*Este es el canvas donde se agregan todos los elementos 
+/**
+ * VistaUsuario
+ */
+public class VistaUsuario extends JPanel{
+    /*Este es el canvas donde se agregan todos los elementos 
     a desplegar en la interfaz.*/
     private JFrame frame;
 
@@ -27,9 +29,10 @@ public class VistaProxy extends JPanel{
     (como presionar el boton)*/
     private JButton boton1;
 
-    public VistaProxy(){
+    public VistaUsuario(){
     	initDisplay();
     	initBoton();
+        frame.setLayout(null);
     	//initPantalla();
         //this.getContentPane().setBackground(Color.RED);
     }
@@ -40,7 +43,7 @@ public class VistaProxy extends JPanel{
         frame.setSize(800, 600);
         frame.setLocation(200,200);
 
-        instrucciones = new JLabel("Ingrese a su cuenta");
+        instrucciones = new JLabel("Ingrese su nueva cuenta");
         instrucciones.setFont(new Font("Courier", Font.BOLD, 30));
         instrucciones.setBounds(250,100,600,100);
         frame.add(instrucciones);
@@ -83,28 +86,18 @@ public class VistaProxy extends JPanel{
         boton1.setFont(new Font("Arial", Font.BOLD, 30));
         //Se agrega al frame
         frame.add(boton1);
-        /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
-        boton1.addActionListener(e -> {
-	    System.out.println(textofield.getText());
-            System.out.println("Poner el if y mostrar un mensaje de exito o nel, usar prozy");
-        });
+        
     }
 
 
-    public void initPantalla(){
-        /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
-        el thread que maneja la ventana realmente termine su ejecucion*/
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*Esta linea determina que toda la disposicion de los elementos
-        (donde se ubicaran) depende completamente de nosotros.*/
-        frame.setLayout(null);
-        //Se asigna al frame como visible
-        frame.setVisible(true);
+    public void function(ActionListener listo){
+        boton1.addActionListener(listo);
     }
 
     
     public void setVisible(boolean bln){
         frame.setVisible(bln);
     }
+
+    
 }

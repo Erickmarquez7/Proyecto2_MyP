@@ -6,9 +6,10 @@ import myp.proyecto2.model.Receta;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
 public class VistaMuestra extends JPanel{
 
-    private LinkedList<Receta> recetas;
+    private LinkedList<Receta> recetas = new LinkedList<>();
 
     private JFrame frame;
 
@@ -19,13 +20,16 @@ public class VistaMuestra extends JPanel{
 //    private JButton botonVerRecetas;
 //    private JButton botonBuscarRecetas;
 
-    public VistaMuestra(){}
+    public VistaMuestra(){
+        initDisplay();
+        initBoton();
+        frame.setLayout(null);
+    }
 
     public VistaMuestra(LinkedList<Receta> recetas){
         this.recetas = recetas;
         initDisplay();
         initBoton();
-        //initPantalla();
     }
 
     public void initDisplay(){
@@ -35,9 +39,9 @@ public class VistaMuestra extends JPanel{
         frame.setLocation(200,200);
 
         if(recetas.isEmpty()){
-            texto = new JLabel("No hay recetas que coindicen con tu búsqueda :(");
+            texto = new JLabel("No hay recetas que \ncoindicen con tu búsqueda :(");
             texto.setFont(new Font("Arial", Font.BOLD, 40));
-            texto.setBounds(200,300,400,100);
+            texto.setBounds(200,250,400,100);
             texto.setForeground(Color.RED);
             frame.add(texto);
             return;
@@ -98,19 +102,9 @@ public class VistaMuestra extends JPanel{
 
     }
 
-
-    public void initPantalla(){
-        /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
-        el thread que maneja la ventana realmente termine su ejecucion*/
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*Esta linea determina que toda la disposicion de los elementos
-        (donde se ubicaran) depende completamente de nosotros.*/
-        frame.setLayout(null);
-        //Se asigna al frame como visible
-        frame.setVisible(true);
+    public void setVisible(boolean bln){
+        frame.setVisible(bln);
     }
 
-      public static void main(String[] ar) {
-        VistaMuestra interfaz1 = new VistaMuestra();
-    }
+
 }

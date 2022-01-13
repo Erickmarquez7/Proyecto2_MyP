@@ -17,11 +17,11 @@ public class Ingrediente {
 
     @Override
     public String toString(){
-	return String.format("%s   %.2 %s", nombre, cantidad, medida.toString());
+	return String.format("%s   %.3f%s", nombre, cantidad, medida.toString());
     }
 
     public String serializa(){
-        return String.format("%s-%s-%.3f", nombre, medida.toString(), cantidad);
+        return String.format("%s-%s-%.3f", nombre, medida.valor(), cantidad);
     }
 
     public void deserializa(String registro){
@@ -30,7 +30,10 @@ public class Ingrediente {
         }
         registro = registro.trim();
         String[] campos = registro.split("-");
-        if(campos.length != 4){
+	System.out.println("Campos <- " + campos.length);
+	for(int i = 0; i < campos.length; i++)
+	System.out.println("Ingrediente deserializa" + campos[i]);
+        if(campos.length != 3){
             throw new ExcepcionRegistroInvalido("Registro no válido.");
         }
         try{
@@ -38,7 +41,7 @@ public class Ingrediente {
             this.medida = Medida.valueOf(campos[1]);
             this.cantidad = Double.parseDouble(campos[2]);
         }catch (NumberFormatException nfe){
-            throw new ExcepcionRegistroInvalido("Registro no válido.");
+            throw new ExcepcionRegistroInvalido("Registro no válido 2.");
         }
     }
 }

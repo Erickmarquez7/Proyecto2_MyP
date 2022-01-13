@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class VistaProxy extends JPanel{
+public class VistaAddReceta extends JPanel{
 
 	/*Este es el canvas donde se agregan todos los elementos 
     a desplegar en la interfaz.*/
@@ -27,7 +27,7 @@ public class VistaProxy extends JPanel{
     (como presionar el boton)*/
     private JButton boton1;
 
-    public VistaProxy(){
+    public VistaAddReceta(){
     	initDisplay();
     	initBoton();
     	//initPantalla();
@@ -87,7 +87,7 @@ public class VistaProxy extends JPanel{
         de cierta forma cuando se presione el boton*/
         boton1.addActionListener(e -> {
 	    System.out.println(textofield.getText());
-            System.out.println("Poner el if y mostrar un mensaje de exito o nel, usar prozy");
+            System.out.println("Prozy");
         });
     }
 

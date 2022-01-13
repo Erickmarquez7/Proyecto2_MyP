@@ -21,6 +21,8 @@ public class Receta implements Registro{
         this.dificultad = dificultad;
     }
 
+    /*
+
     public Receta(String nombre, LinkedList<Ingrediente> ingredientes, 
     String instrucciones, int tiempo, int dificultad){
         this.nombre = nombre;
@@ -46,6 +48,10 @@ public class Receta implements Registro{
         this.instrucciones = cambiaInstruccion(instrucciones);
         this.tiempo = tiempo;
         this.dificultad = dificultad;
+    }
+    */
+    public Receta(String receta){
+	deserializa(receta);
     }
 
     public LinkedList<Ingrediente> cambiaIngrediente(String ings){
@@ -120,6 +126,8 @@ public class Receta implements Registro{
         registro = registro.trim();
         String[] params = registro.split("/");
 
+	System.out.println("Cheto" + params.length);
+	for(int i = 0; i < params.length; i++) System.out.println(params[i]);
         if(params.length != 5)
             throw new ExcepcionRegistroInvalido("Número de parámetros no válido.");
 
@@ -138,8 +146,12 @@ public class Receta implements Registro{
         ingredientes = new LinkedList<Ingrediente>();
         ings = ings.trim();
         String[] ingr = ings.split(",");
-        for(String e : ingr)
-            ingredientes.add(new Ingrediente(e));
+	System.out.println(ingr.length);
+        for(String e : ingr){
+	    Ingrediente aux = new Ingrediente(null,null,0.0,0);
+	    aux.deserializa(e);
+            ingredientes.add(aux);
+	System.out.println(e);}
     }
 
     public void deserializaInstrucciones(String ins){

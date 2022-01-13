@@ -1,0 +1,6 @@
+Huevos con Jamón/huevo-PZ-6,jamón-G-250/haz un huevo,añade jamón/20/2
+Tomates acordeon/tomates-PZ-4,queso parmesano-G-50/corta los tomates en forma de acordeon,distribuye el queso/30/1
+Albondigas/carne de cerdo picada-G-500,salsa de tomate-G-400,aceite de oliva-ML-200/forma albondigas con las manos,agregalas al sarten junto con la salsa y el aceite/60/2
+Crema de chocolate/chocolate fondant-G-75,nata-ML-400,azucar-G-20/cortar y fundir el chocolate,viertelo en un bol y agrega nata y azucar/15/2
+Pure de papa/papa-KG-1,mantequilla-G-250,leche-ML-250/hierve las papas,trituralas,agrega mantequilla y leche,mezcla/50/2
+Tarta de tacos/tortillas de maiz-PZ-8,carne de ternera-G-400,tomates-PZ-2,Queso rallado-G-100//60/3

@@ -17,6 +17,7 @@ public class VistaBuscador extends JPanel{
     public VistaBuscador(){
         initDisplay();
         initBoton();
+        frame.setLayout(null);
         //initPantalla();
     }
 
@@ -24,6 +25,7 @@ public class VistaBuscador extends JPanel{
         frame = new JFrame("Cheems Ramsay");
         frame.setSize(800, 600);
         frame.setLocation(200,200);
+        
 
         texto = new JLabel("¿Cómo quieres buscar?");
         texto.setFont(new Font("Courier", Font.BOLD, 30));
@@ -43,9 +45,6 @@ public class VistaBuscador extends JPanel{
         frame.add(botonNombre);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-        botonNombre.addActionListener(e -> {
-            System.out.println("Por Nombre");
-        });
 
 
 
@@ -56,9 +55,6 @@ public class VistaBuscador extends JPanel{
         frame.add(botonDificultad);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-        botonDificultad.addActionListener(e -> {
-            System.out.println("Buscar por Dificultad");
-        });
 
 
         botonTiempo = new JButton("Por tiempo");
@@ -68,9 +64,6 @@ public class VistaBuscador extends JPanel{
         frame.add(botonTiempo);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-        botonTiempo.addActionListener(e -> {
-            System.out.println("Buscar por Tiempo");
-        });
 
 
         botonIngredientes = new JButton("Por Ingredientes");
@@ -80,9 +73,16 @@ public class VistaBuscador extends JPanel{
         frame.add(botonIngredientes);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-        botonIngredientes.addActionListener(e -> {
-            System.out.println("Buscar por Ingredientes");
-        });
+
+    }
+
+
+    public void function(ActionListener nombre, ActionListener dificultad,
+    ActionListener tiempo, ActionListener ingredientes){
+        botonNombre.addActionListener(nombre);
+        botonDificultad.addActionListener(dificultad);
+        botonTiempo.addActionListener(tiempo);
+        botonIngredientes.addActionListener(ingredientes);
 
     }
 
@@ -98,7 +98,8 @@ public class VistaBuscador extends JPanel{
         frame.setVisible(true);
     }
 
-      public static void main(String[] ar) {
-        VistaBuscador interfaz1 = new VistaBuscador();
+    
+    public void setVisible(boolean bln){
+        frame.setVisible(bln);
     }
 }

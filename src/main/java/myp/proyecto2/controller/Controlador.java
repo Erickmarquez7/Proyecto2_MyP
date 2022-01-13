@@ -18,18 +18,26 @@ public class Controlador{
     //vista para que te muestre toda la receta
     VistaReceta vistaReceta; //= new VistaReceta();
 
+    VistaUsuario usuario;
+
+    VistaAnade anade;
+
     public Controlador(VistaPrincipal vistaPrincipal, VistaMuestra vistaMuestra, VistaBuscador vistaBuscador,
-    VistaProxy vistaProxy, VistaReceta vistaReceta){
+    VistaProxy vistaProxy, VistaReceta vistaReceta, VistaUsuario usuario, VistaAnade anade){
         this.vistaPrincipal = vistaPrincipal;
         this.vistaMuestra = vistaMuestra;
         this.vistaBuscador = vistaBuscador;
         this.vistaProxy = vistaProxy;
         this.vistaReceta = vistaReceta;
-
+        this.usuario = usuario;
+        this.anade = anade;
     }
 
-    public static void main(String[] args){
-    	Recetario recetario = new RecetarioCheems();
-	    SwingUtilities.invokeLater(Vista::new);
-    }
+
+    public static void main(String[] args) {
+        new Vista();
+        Recetario recetario = new RecetarioCheems();
+
+    } 
 }
+

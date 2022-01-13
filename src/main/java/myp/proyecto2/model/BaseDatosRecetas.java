@@ -9,7 +9,7 @@ public class BaseDatosRecetas extends BaseDatos<Receta>{
 
     @Override
     public Receta creaRegistro(){
-	    return new Receta(null, "", "", 0,0);
+	    return new Receta(null, null, null, 0,0);
     }
 
     @Override
