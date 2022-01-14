@@ -1,7 +1,10 @@
 package myp.proyecto2.view;
 
 import java.util.LinkedList;
+
+import myp.proyecto2.model.BaseDatosRecetas;
 import myp.proyecto2.model.Receta;
+import myp.proyecto2.model.RecetarioCheems;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +13,9 @@ import java.awt.event.*;
 public class VistaMuestra extends JPanel{
 
     private LinkedList<Receta> recetas = new LinkedList<>();
+
+    VistaReceta muestra;
+    private Receta parametro;
 
     private JFrame frame;
 
@@ -21,6 +27,8 @@ public class VistaMuestra extends JPanel{
 //    private JButton botonBuscarRecetas;
 
     public VistaMuestra(){
+        RecetarioCheems recetario = new RecetarioCheems();
+        recetas = recetario.getRecetas();
         initDisplay();
         initBoton();
         frame.setLayout(null);
@@ -37,6 +45,7 @@ public class VistaMuestra extends JPanel{
         frame.setBackground(Color.CYAN);
         frame.setSize(800, 600);
         frame.setLocation(200,200);
+        frame.getContentPane().setBackground(new Color(204,229,255));
 
         if(recetas.isEmpty()){
             texto = new JLabel("No hay recetas que \ncoindicen con tu búsqueda :(");
@@ -47,27 +56,36 @@ public class VistaMuestra extends JPanel{
             return;
         }
 
-        texto = new JLabel("Las recetas que coinciden con tu búsqueda son: ");
+        texto = new JLabel("Las recetas que coinciden con ");
         texto.setFont(new Font("Courier", Font.BOLD, 30));
-        texto.setBounds(150,50,600,50);
+        texto.setBounds(100,50,600,50);
         frame.add(texto);
+
+        JLabel texto2 = new JLabel("tu búsqueda son: ");
+        texto2.setFont(new Font("Courier", Font.BOLD, 30));
+        texto2.setBounds(100,80,600,50);
+        frame.add(texto2);
+
         
 
-        int altura = 80;
         int contador = 0;
         for(Receta r : recetas){
             JLabel receta = new JLabel("*" + r.getNombre());
             receta.setFont(new Font("Arial", Font.PLAIN,20));
-            receta.setBounds(150, 100+contador*30,300,30);
+            receta.setBounds(130, 150+contador*30,300,30);
             frame.add(receta);
 
-            JButton botonReceta = new JButton();
+            JButton botonReceta = new JButton("Ver receta");
             botonReceta.setFont(new Font("Courier", Font.ITALIC,20));
-            botonReceta.setBounds(450,100+contador*30,300,30);
+            botonReceta.setBounds(450,150+contador*30,300,30);
             frame.add(botonReceta);
+            contador++;
 
             botonReceta.addActionListener(e -> {
-                System.out.println("á");
+                parametro = r;
+                VistaReceta.setReceta(r);
+                muestra = new VistaReceta(r);
+                muestra.setVisible(true);
             });
         }
         //int i = 100;
@@ -94,6 +112,10 @@ public class VistaMuestra extends JPanel{
 
     private void verReceta(Receta receta){
 
+    }
+
+    public void setRecetas(LinkedList<Receta> recetas){
+        this.recetas = recetas;
     }
 
 

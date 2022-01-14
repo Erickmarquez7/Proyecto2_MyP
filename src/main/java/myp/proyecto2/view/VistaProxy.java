@@ -39,6 +39,7 @@ public class VistaProxy extends JPanel{
         //frame.setBackground(Color.CYAN);
         frame.setSize(800, 600);
         frame.setLocation(200,200);
+        frame.getContentPane().setBackground(new Color(204,229,255));
 
         instrucciones = new JLabel("Ingrese a su cuenta");
         instrucciones.setFont(new Font("Courier", Font.BOLD, 30));

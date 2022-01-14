@@ -4,11 +4,19 @@ package myp.proyecto2.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import myp.proyecto2.model.Buscador;
+import myp.proyecto2.model.PorNombre;
+import myp.proyecto2.model.*;
+import myp.proyecto2.model.RecetarioCheems;
+
 public class VistaBuscador extends JPanel{
     private JFrame frame;
-
+    
     private JLabel texto;
 
+    private Buscador buscador;
+    private VistaBusqueda vista;
     private JButton botonNombre;
     private JButton botonDificultad;
     private JButton botonTiempo;
@@ -25,7 +33,7 @@ public class VistaBuscador extends JPanel{
         frame = new JFrame("Cheems Ramsay");
         frame.setSize(800, 600);
         frame.setLocation(200,200);
-        
+        frame.getContentPane().setBackground(new Color(204,229,255));
 
         texto = new JLabel("¿Cómo quieres buscar?");
         texto.setFont(new Font("Courier", Font.BOLD, 30));
@@ -45,6 +53,12 @@ public class VistaBuscador extends JPanel{
         frame.add(botonNombre);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
+        botonNombre.addActionListener(e ->{
+            buscador = new PorNombre();
+            Recetario recetario = new RecetarioCheems();
+            for(Receta r : buscador.busca("uevo", recetario))
+            System.out.println(r.toString());
+        });
 
 
 

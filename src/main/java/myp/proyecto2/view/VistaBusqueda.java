@@ -3,17 +3,18 @@ package myp.proyecto2.view;
 //Bibliotecas para la ventana y para eventos.
 import javax.swing.*;
 
-import myp.proyecto2.model.Receta;
+import myp.proyecto2.model.Buscador;
 
 import java.awt.*;
 import java.awt.event.*;
 
-public class VistaAddReceta extends JPanel{
+public class VistaBusqueda extends JPanel{
 
 	/*Este es el canvas donde se agregan todos los elementos 
     a desplegar en la interfaz.*/
     private JFrame frame;
 
+    private Buscador buscador;
     private JLabel instrucciones;
 	//Los label sirven para añadir texto a la ventana.
     private JLabel texto;
@@ -30,13 +31,13 @@ public class VistaAddReceta extends JPanel{
     (como presionar el boton)*/
     private JButton boton1;
 
-
-    public VistaAddReceta(){
+    public VistaBusqueda(Buscador buscador){
+        this.buscador = buscador;
     	initDisplay();
     	initBoton();
-    	
+    	//initPantalla();
+        //this.getContentPane().setBackground(Color.RED);
     }
-
 
     public void initDisplay(){
     	frame = new JFrame("Cheems Ramsay");
@@ -92,7 +93,7 @@ public class VistaAddReceta extends JPanel{
         de cierta forma cuando se presione el boton*/
         boton1.addActionListener(e -> {
 	    System.out.println(textofield.getText());
-            System.out.println("Prozy");
+            System.out.println("Poner el if y mostrar un mensaje de exito o nel, usar prozy");
         });
     }
 

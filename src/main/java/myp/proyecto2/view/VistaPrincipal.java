@@ -28,20 +28,27 @@ public class VistaPrincipal extends JPanel{
         frame = new JFrame("Cheems Ramsay");
         frame.setSize(800, 600);
         frame.setLocation(200,200);
+        frame.getContentPane().setBackground(new Color(204,229,255));
 
-        JLabel saludo = new JLabel("Bienvenido al recetario del Chef Cheems Ramsay");
-        saludo.setBounds(50,50,700,100);
-        saludo.setFont(new Font("Arial", Font.BOLD, 40));
-        saludo.setForeground(Color.MAGENTA);
+        JLabel saludo = new JLabel("Bienvenido al recetario de");
+        saludo.setBounds(100,100,700,50);
+        saludo.setFont(new Font("Courier", Font.ITALIC, 40));
+        saludo.setForeground(new Color(102,0,51));
         frame.add(saludo);
 
-        texto = new JLabel("Selecciona que quieres hacer");
+        JLabel saludo2 = new JLabel("Cheems Ramsay");
+        saludo2.setFont(new Font("Courier", Font.ITALIC, 40));
+        saludo2.setBounds(250,150,700,50);
+        saludo2.setForeground(new Color(102,0,51));
+        frame.add(saludo2);
+
+        texto = new JLabel("Selecciona que deseas hacer");
         //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
         //el primer parametro lo mueve en linea horizontal a la derecha
         //el segundo en vertical abajo
         //
         texto.setFont(new Font("Courier", Font.BOLD, 30));
-        texto.setBounds(150,150,600,100);
+        texto.setBounds(150,220,600,100);
         frame.add(texto);
 
     }
@@ -49,7 +56,7 @@ public class VistaPrincipal extends JPanel{
 
     public void initBoton(){
         botonVerRecetas = new JButton("Ver todas las recetas");
-        botonVerRecetas.setBounds(200,250,400,50);
+        botonVerRecetas.setBounds(200,350,400,50);
         //botonVerRecetas.setPreferredSize(new Dimension(400,50));
         botonVerRecetas.setFont(new Font("Courier", Font.BOLD, 20));
         //Se agrega al frame
@@ -58,7 +65,7 @@ public class VistaPrincipal extends JPanel{
 
         botonBuscarRecetas = new JButton("Buscar recetas");
         botonBuscarRecetas.setFont(new Font("Courier", Font.BOLD, 20));
-        botonBuscarRecetas.setBounds(200,300,400,50);
+        botonBuscarRecetas.setBounds(200,400,400,50);
         //botonVerRecetas.setPreferredSize(new Dimension(400,50));
         //Se agrega al frame
         frame.add(botonBuscarRecetas);
@@ -66,7 +73,7 @@ public class VistaPrincipal extends JPanel{
 
 	    botonAddReceta = new JButton("Añadir receta");
 	    botonAddReceta.setFont(new Font("Courier", Font.BOLD, 15));
-	    botonAddReceta.setBounds(550,500,200,30);
+	    botonAddReceta.setBounds(550,600,200,30);
 	    frame.add(botonAddReceta);
         //add(botonAddReceta);
 

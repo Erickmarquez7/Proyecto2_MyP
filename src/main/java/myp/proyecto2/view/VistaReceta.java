@@ -15,7 +15,7 @@ public class VistaReceta extends JPanel{
 
     private JButton pedir;
 
-    private Receta receta;
+    private static Receta receta;
 
 //    private JButton pedir;
 //    private JButton botonBuscarRecetas;
@@ -24,6 +24,10 @@ public class VistaReceta extends JPanel{
         initDisplay();
         initBoton();
         frame.setLayout(null);
+    }
+
+    public static void setReceta(Receta receta2){
+        receta = receta2;
     }
 
 
@@ -35,19 +39,24 @@ public class VistaReceta extends JPanel{
         frame.setLayout(null);
     }
 
-    public void setReceta(Receta receta){
-        this.receta=receta;
-    }
-
-
     public void initDisplay(){
         frame = new JFrame("Cheems Ramsay");
-        frame.setBackground(Color.CYAN);
         frame.setSize(800, 600);
         frame.setLocation(200,200);
 
-        JScrollBar scrollbar = new JScrollBar(JScrollBar.VERTICAL);
-        frame.setContentPane(scrollbar);
+        JScrollBar scrollbar = new JScrollBar(JScrollBar.VERTICAL,30,40,0,500);
+        frame.getContentPane().add(scrollbar, BorderLayout.EAST);
+        frame.getContentPane().setBackground(new Color(204,229,255));
+
+        if(receta == null){
+            JLabel nula = new JLabel("No se puede cargar la receta");
+            nula.setBounds(50,260,700,40);
+            nula.setFont(new Font("Courier", Font.BOLD, 30));
+            nula.setForeground(Color.RED);
+            frame.add(nula);
+            return;
+        }
+
         
         //Se muestra el nombre
         JLabel name = new JLabel(receta.getNombre());
@@ -56,17 +65,17 @@ public class VistaReceta extends JPanel{
         frame.add(name);
 
         // Se añaden los ingredintes
-        JLabel ingrediente = new JLabel("Ingredintes:");
+        JLabel ingrediente = new JLabel("Ingredientes:");
         ingrediente.setFont(new Font("Arial", Font.BOLD,20));
         ingrediente.setBounds(100,60,600,30);
         frame.add(ingrediente);
 
-        int altura = 10;
+        int altura = 100;
         //cambiar por while it
         for(Ingrediente i : receta.getIngredientes()){
             ingrediente = new JLabel("* " + i.toString());
             ingrediente.setFont(new Font("Courier", Font.PLAIN,18));
-            ingrediente.setBounds(150,altura,200,20);
+            ingrediente.setBounds(150,altura,700,20);
             frame.add(ingrediente);
             altura += 20;
         }
@@ -82,7 +91,7 @@ public class VistaReceta extends JPanel{
         for(String i : receta.getInstrucciones()){
             instruccion = new JLabel("* " + i);
             instruccion.setFont(new Font("Courier", Font.PLAIN,18));
-            instruccion.setBounds(150,altura,200,20);
+            instruccion.setBounds(150,altura,700,20);
             frame.add(instruccion);
             altura += 20;
         }
@@ -94,38 +103,38 @@ public class VistaReceta extends JPanel{
         frame.add(tiempo);
 
         tiempo = new JLabel(receta.getTiempoString());
-        tiempo.setBounds(180,altura+10,200,30);
-        tiempo.setFont(new Font("Courier", Font.PLAIN, 18));
+        tiempo.setBounds(220,altura+10,200,30);
+        tiempo.setFont(new Font("Courier", Font.PLAIN, 20));
         frame.add(tiempo);
         altura += 40;
 
         // Se añade la dificultad
-        JLabel dificultad = new JLabel("Dificulad: ");
+        JLabel dificultad = new JLabel("Dificultad: ");
         dificultad.setFont(new Font("Arial", Font.BOLD, 20));
         dificultad.setBounds(100,altura,200,30);
         frame.add(dificultad);
 
         for(int i = 0; i < receta.getDificultad(); i++){
             dificultad = new JLabel("★");
-            dificultad.setFont(new Font("Courier", Font.BOLD, 20));
-            dificultad.setBounds(250 + i*30, altura, 30,20);
+            dificultad.setFont(new Font("Courier", Font.BOLD, 22));
+            dificultad.setBounds(250 + i*30, altura+5, 30,20);
             frame.add(dificultad);
-        }
-
-        
+        }       
     }
+
 
     public void initBoton(){
     	//Se agrega un boton con un mensaje
-        pedir = new JButton("Enviar a domicilio");
+        pedir = new JButton("Pedir a domicilio");
         //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
-        pedir.setBounds(550,400,150,50);
-        pedir.setFont(new Font("Courier", Font.BOLD, 30));
+        pedir.setBounds(450,500,300,50);
+        pedir.setFont(new Font("Courier", Font.BOLD, 20));
+        pedir.setBackground(Color.BLUE);
+        pedir.setForeground(Color.WHITE);
         //Se agrega al frame
         frame.add(pedir);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
-
     }
 
     
