@@ -2,14 +2,23 @@ package myp.proyecto2.model;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+/**
+ * Clase para Recerta que
+ * implementan registro pues es un objeto "agregable" a la base de datos
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 
-public class Receta implements Registro{
+
+public class Receta implements Registro<Receta,CampoBuscador>{
 
     private String nombre;
     private LinkedList<Ingrediente> ingredientes;
     private LinkedList<String> instrucciones;
     private int tiempo;
     private int dificultad;
+    private Receta registro;
 
 
     public Receta(String nombre, LinkedList<Ingrediente> ingredientes, 
@@ -19,6 +28,10 @@ public class Receta implements Registro{
         this.instrucciones = instrucciones;
         this.tiempo = tiempo;
         this.dificultad = dificultad;
+    }
+
+    public Receta(String nombre){
+        this.nombre=nombre;
     }
 
     /*
@@ -50,9 +63,9 @@ public class Receta implements Registro{
         this.dificultad = dificultad;
     }
     */
-    public Receta(String receta){
-	deserializa(receta);
-    }
+    //public Receta(String receta){
+	//deserializa(receta);
+    //}
 
     public LinkedList<Ingrediente> cambiaIngrediente(String ings){
         LinkedList<Ingrediente> ingredientes = new LinkedList<Ingrediente>();
@@ -98,12 +111,22 @@ public class Receta implements Registro{
         return dificultad;
     }
 
+    
+    /**
+     * Regresa el registro serializado en una línea de texto.
+     * @return la serialización del registro en una línea de texto.
+     */
     @Override
     public String serializa() {
         return String.format("%s/%s/%s/%d/%d",nombre,serializaIngredientes(),
-        serializaInstrucciones(), dificultad, tiempo);
+        serializaInstrucciones(),tiempo, dificultad);
     }
 
+
+    /**
+    * Metodo auxiliar para serializar las instrucciones
+    * @return  las intrucciones serializadas
+    */
     public String serializaIngredientes(){
         String s = "";
         for(Ingrediente i : ingredientes)
@@ -111,6 +134,11 @@ public class Receta implements Registro{
         return s;
     }
 
+
+    /**
+    * Metodo auxiliar para serializar las instrucciones
+    * @return  las intrucciones serializadas
+     */
     public String serializaInstrucciones(){
         String s = "";
         for(String i : instrucciones)
@@ -118,6 +146,13 @@ public class Receta implements Registro{
         return s;
     }
 
+
+    /**
+     * Deserializa una línea de texto en las propiedades del registro.
+     * @param registro la línea a deserializar.
+     * @throws ExcepcionLineaInvalida si la línea recibida es nula, vacía o no
+     *         es una serialización válida de un registro.
+     */
     @Override
     public void deserializa(String registro) {
         if(registro == null)
@@ -133,15 +168,23 @@ public class Receta implements Registro{
 
         try{
             nombre = params[0];
-            deserializaIngredientes(params[1]);
+            if(params[1] != null)
+                deserializaIngredientes(params[1]);
+            else
+                ingredientes = new LinkedList<>();
             deserializaInstrucciones(params[2]);
-            dificultad  = Integer.parseInt(params[3]);
-            tiempo = Integer.parseInt(params[4]);
+            tiempo = Integer.parseInt(params[3]);
+            dificultad  = Integer.parseInt(params[4]);
         }catch (NumberFormatException nfe){
             throw new ExcepcionRegistroInvalido("Registro no válido");
         }
     }
 
+
+    /**
+    * Metodo auxiliar para deserializar los ingredientes
+    *@param ings los ingredientes a deserializar
+     */
     public void deserializaIngredientes(String ings){
         ingredientes = new LinkedList<Ingrediente>();
         ings = ings.trim();
@@ -154,6 +197,11 @@ public class Receta implements Registro{
 	System.out.println(e);}
     }
 
+
+    /**
+    * Metodo auziliar para deserializar las intrucciones
+    * @param ins las instrucciones a deserializar
+     */
     public void deserializaInstrucciones(String ins){
         instrucciones = new LinkedList<String>();
         ins = ins.trim();
@@ -163,8 +211,14 @@ public class Receta implements Registro{
     }
 
 
+    /**
+    * Actualiza los valores del registro con los del registro recibido.
+     * @param registro el registro con el cual actualizar los valores.
+     * @throws ClassCastException si el registro no es de la instancia correcta.
+     */
     @Override
-    public void actualiza(Registro registro) {
+    public void actualiza(Receta registro) {
+        this.registro = registro;
         if(!(registro instanceof Receta))
             throw new ExcepcionRegistroInvalido();
         
@@ -232,5 +286,57 @@ public class Receta implements Registro{
             s += String.format("%d min\n", tiempo);
 
         return s;
+    }
+
+
+    /**
+     * Nos dice si el registro caza el valor dado en el campo especificado.
+     * @param campo el campo que hay que cazar.
+     * @param valor el valor con el que debe cazar el campo del registro.
+     */
+    @Override
+    public boolean caza(CampoBuscador campo, Object valor) {
+        if(campo == null)
+            throw new IllegalArgumentException();
+
+        switch(campo){
+            case NOMBRE:
+                if(valor instanceof String){
+                    String nombre = (String)valor;
+                    return getNombre().contains(nombre) && !nombre.equals("");
+                }break;
+            case INGREDIENTES:
+                if(valor instanceof String){
+                    return cazaIngredientes((String)valor);
+                }break;
+            case INSTRUCCIONES: // Este buscador no se va a aplicar
+                if(valor instanceof String){
+                    String ins = (String)valor;
+                    return !ins.equals("") && getInstrucciones().contains(ins);
+                }break;
+            case TIEMPO:
+                if(valor instanceof Integer){
+                    int tiempo = (int)valor;
+                    return tiempo >= 0 && (getTiempo() <= tiempo);
+                }break;
+            case DIFICULTAD:
+                if(valor instanceof Integer){
+                    int dificultad = (int)valor;
+                    return (dificultad >= 0 && dificultad < 6) && (getDificultad() <= dificultad);
+                }break;
+        }
+        return false;
+    }
+
+    private boolean cazaIngredientes(String ingrediente){
+        String[] ings = ingrediente.trim().split(",");
+        Iterator<Ingrediente> it = getIngredientes().iterator();
+        while(it.hasNext()){
+            Ingrediente ing = it.next();
+            for(int i = 0; i < ings.length; i++)
+                if(ing.getNombre().contains(ings[i]))
+                    return true;
+        }
+        return false;
     }
 }

@@ -1,5 +1,10 @@
 package myp.proyecto2.model;
-
+/**
+ * Clase para los ingredientes de las recetas
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 public class Ingrediente {
     private String nombre;
     private Medida medida;
@@ -17,17 +22,29 @@ public class Ingrediente {
 
     @Override
     public String toString(){
-	return String.format("%s   %.3f%s", nombre, cantidad, medida.toString());
+	return String.format("%s   %.1f  %s", nombre, cantidad, medida.toString());
     }
 
+
+    /**
+     * Regresa el registro serializado en una línea de texto.
+     * @return la serialización del registro en una línea de texto.
+     */
     public String serializa(){
         return String.format("%s-%s-%.3f", nombre, medida.valor(), cantidad);
     }
 
+
+    /**
+     * Deserializa una línea de texto en las propiedades del registro.
+     * @param registro la línea a deserializar.
+     * @throws ExcepcionLineaInvalida si la línea recibida es nula, vacía o no
+     *         es una serialización válida de un registro.
+     */
     public void deserializa(String registro){
-        if(registro == null){
+        if(registro == null)
             throw new ExcepcionRegistroInvalido("El registro es nulo.");
-        }
+
         registro = registro.trim();
         String[] campos = registro.split("-");
 	System.out.println("Campos <- " + campos.length);
@@ -43,5 +60,9 @@ public class Ingrediente {
         }catch (NumberFormatException nfe){
             throw new ExcepcionRegistroInvalido("Registro no válido 2.");
         }
+    }
+
+    public String getNombre(){
+	return nombre;
     }
 }

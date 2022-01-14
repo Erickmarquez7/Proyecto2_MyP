@@ -1,4 +1,10 @@
 package myp.proyecto2.model;
+/**
+ * Enumeracion para las posibles medidad de una receta
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 
 public enum Medida {
     OZ,
