@@ -2,6 +2,7 @@ package myp.proyecto2.controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.LinkedList;
 
 import  myp.proyecto2.view.*;
 import  myp.proyecto2.model.*;
@@ -22,6 +23,13 @@ public class Controlador{
 
     VistaAnade anade;
 
+    Buscador b;
+
+    LinkedList<Receta> recetas = new LinkedList<Receta>();
+    LinkedList<Receta> base = new LinkedList<Receta>();;
+
+
+
     public Controlador(VistaPrincipal vistaPrincipal, VistaMuestra vistaMuestra, VistaBuscador vistaBuscador,
     VistaProxy vistaProxy, VistaReceta vistaReceta, VistaUsuario usuario, VistaAnade anade){
         this.vistaPrincipal = vistaPrincipal;
@@ -31,6 +39,34 @@ public class Controlador{
         this.vistaReceta = vistaReceta;
         this.usuario = usuario;
         this.anade = anade;
+
+        base.add(new Receta("nombre"));
+
+
+/*        vistaBuscador.function(e -> {
+            System.out.println("Buscar por Nombre");
+            b = new PorNombre();
+            recetas = b.busca("nombre", base);
+            vistaMuestra.setRecetas(recetas);
+            vistaMuestra.setVisible(true);}, 
+
+
+            e -> {
+            System.out.println("Buscar por Dificultad");
+            b = new PorDificultad();
+            vistaMuestra.setVisible(true);}, 
+
+            e -> {
+            System.out.println("Buscar por Tiempo");
+            b = new PorTiempo();
+            vistaMuestra.setVisible(true);}, 
+
+            e -> {
+            System.out.println("Buscar por Ingredientes");
+            b = new PorIngredientes();
+            vistaMuestra.setVisible(true);}
+        );*/
+
     }
 
 
