@@ -5,7 +5,6 @@ package myp.proyecto2.model;
  * @author Deloya Andrade Ana Valeria
  * @author Lopez Balcazar Fernando
  */
-
 public class RecetarioCheems extends Recetario{
     
     public RecetarioCheems(){

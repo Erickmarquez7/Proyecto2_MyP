@@ -48,7 +48,7 @@ public class Chef implements Registro<Chef,CampoChef>, Observer{
      */
     @Override
     public String serializa() {
-        return String.format("%s/%s/%d", nombre, ubicacion, numero);
+        return String.format("%s/%s/%d\n", nombre, ubicacion, numero);
     }
 
 
@@ -96,15 +96,7 @@ public class Chef implements Registro<Chef,CampoChef>, Observer{
     }
 
 	@Override
-	public void agrega(Recetario receta) {
-	}
-
-	@Override
-	public void elimina(Recetario receta) {
-	}
-
-	@Override
-	public void notifica() {
+	public void actualizar() {
         System.out.println(String.format("%s, se ha añadido una receta al recetario, te recomendamos revisarla!!!",nombre));		
 	}
 

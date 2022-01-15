@@ -10,5 +10,10 @@ public interface Sujeto {
     * Actualiza las recetas de los sujetos
     * @param receta la nueva receta
      */
-    public void actualiza(Receta receta);
+    public void notificar();
+
+    public void agrega(Chef chef);
+
+    public void elimina(Chef chef);
+
 }

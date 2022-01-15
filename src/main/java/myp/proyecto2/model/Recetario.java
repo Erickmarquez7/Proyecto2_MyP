@@ -9,8 +9,8 @@ import java.util.LinkedList;
 
 public abstract class Recetario implements Sujeto{
 
-	private BaseDatosRecetas recetario;
-	private BaseDatosChefs chefs;
+	protected BaseDatosRecetas recetario;
+	protected BaseDatosChefs chefs;
 
 	public Recetario(String directorio){
 		recetario = new BaseDatosRecetas();
@@ -22,9 +22,22 @@ public abstract class Recetario implements Sujeto{
 	/**Agrega una receta al recetario del chef
 	 * @param registro la receta a agregar
 	 */
-	public void agrega(Receta registro){
-		recetario.agregaRegistro(registro);
-		actualiza(registro);
+	public void agrega(Receta receta){
+		recetario.agregaRegistro(receta);
+		recetario.guarda();
+		notificar();
+	}
+
+	@Override
+    public void agrega(Chef chef){
+		chefs.agregaRegistro(chef);
+		chefs.guarda();
+	}
+
+	@Override
+    public void elimina(Chef chef){
+		chefs.eliminaRegistro(chef);
+		chefs.guarda();
 	}
 
 	/**
@@ -32,9 +45,9 @@ public abstract class Recetario implements Sujeto{
     * @param receta la nueva receta
      */
 	@Override
-	public void actualiza(Receta receta) {
+	public void notificar() {
 	    for(Chef c : chefs.getRegistros())
-		c.notifica();
+			c.actualizar();
 	}
 
 	public LinkedList<Receta> getRecetas(){
@@ -44,6 +57,7 @@ public abstract class Recetario implements Sujeto{
 	public BaseDatosRecetas getRecetario(){
 		return recetario;
 	}
+
 	public BaseDatosChefs getChefs(){
 		return chefs;
 	}
