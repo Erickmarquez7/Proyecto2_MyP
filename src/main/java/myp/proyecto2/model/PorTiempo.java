@@ -12,7 +12,13 @@ public class PorTiempo extends Buscador{
      */
 	@Override
 	public LinkedList<Receta> busca(String cadena, Recetario recetario) {
-		return recetario.getRecetario().buscaRegistros(CampoBuscador.NOMBRE, cadena);
+    int tiempo;
+    try{
+      tiempo = Integer.parseInt(cadena);
+    }catch (NumberFormatException nfe){
+      return null;
+    }
+		return recetario.getRecetario().buscaRegistros(CampoBuscador.TIEMPO, tiempo);
 	}
 
 }

@@ -12,7 +12,7 @@ public class PorIngredientes extends Buscador{
      */
 	@Override
 	public LinkedList<Receta> busca(String cadena, Recetario recetario) {
-		return recetario.getRecetario().buscaRegistros(CampoBuscador.NOMBRE, cadena);
+		return recetario.getRecetario().buscaRegistros(CampoBuscador.INGREDIENTES, cadena);
 	}
 
 

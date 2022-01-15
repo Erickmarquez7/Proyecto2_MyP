@@ -12,6 +12,12 @@ public class PorDificultad extends Buscador{
      */
 	@Override
 	public LinkedList<Receta> busca(String cadena, Recetario recetario) {
-		return recetario.getRecetario().buscaRegistros(CampoBuscador.DIFICULTAD, cadena);
+    int dificulatad;
+    try{
+      dificulatad = Integer.parseInt(cadena);
+    }catch (NumberFormatException nfe){
+      return null;
+    }
+		return recetario.getRecetario().buscaRegistros(CampoBuscador.DIFICULTAD, dificulatad);
 	}
 }
