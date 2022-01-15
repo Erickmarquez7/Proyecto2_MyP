@@ -21,8 +21,6 @@ public class Controlador{
 
     VistaUsuario usuario;
 
-    VistaAnade anade;
-
     Buscador b;
 
     LinkedList<Receta> recetas = new LinkedList<Receta>();
@@ -31,17 +29,13 @@ public class Controlador{
 
 
     public Controlador(VistaPrincipal vistaPrincipal, VistaMuestra vistaMuestra, VistaBuscador vistaBuscador,
-    VistaProxy vistaProxy, VistaReceta vistaReceta, VistaUsuario usuario, VistaAnade anade){
+    VistaProxy vistaProxy, VistaReceta vistaReceta, VistaUsuario usuario){
         this.vistaPrincipal = vistaPrincipal;
         this.vistaMuestra = vistaMuestra;
         this.vistaBuscador = vistaBuscador;
         this.vistaProxy = vistaProxy;
         this.vistaReceta = vistaReceta;
         this.usuario = usuario;
-        this.anade = anade;
-
-        base.add(new Receta("nombre"));
-
 
 /*        vistaBuscador.function(e -> {
             System.out.println("Buscar por Nombre");
