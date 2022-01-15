@@ -13,13 +13,15 @@ public class Proxy implements IProxy{
         this.cuenta=cuenta;
     }
 
+    public Proxy(){}
+
     /**
     * Verifica la cuenta y la contrasena del usuario
     * @param cuenta la cuenta a verificar 
     * @param pass la contrasena a verificar
     * @return true si se verificó correctamente
      */
-	public boolean validar(int cuenta, String pass) {
+	public boolean validar(String cuenta, String pass) {
 		return this.cuenta.validar(cuenta, pass);
 	}
 

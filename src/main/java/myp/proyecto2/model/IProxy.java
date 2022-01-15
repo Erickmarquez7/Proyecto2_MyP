@@ -5,7 +5,6 @@ package myp.proyecto2.model;
  * @author Deloya Andrade Ana Valeria
  * @author Lopez Balcazar Fernando
  */
-
 public interface IProxy {
     /**
     * Verifica la cuenta y la contrasena del usuario
@@ -13,5 +12,5 @@ public interface IProxy {
     * @param pass la contrasena a verificar
     * @return true si se verificó correctamente
      */
-    public boolean validar(int cuenta, String pass);
+    public boolean validar(String cuenta, String pass);
 }
