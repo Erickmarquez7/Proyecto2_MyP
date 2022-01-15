@@ -9,9 +9,9 @@ package myp.proyecto2.model;
 public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
     private String nombre;
     private String pass;
-    private int cuenta;
+    private String cuenta;
 
-    public Cuenta(String nombre, String pass, int cuenta){
+    public Cuenta(String nombre, String pass, String cuenta){
 	this.nombre = nombre;
 	this.pass = pass;
 	this.cuenta = cuenta;
@@ -23,8 +23,9 @@ public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
     * @param pass la contrasena a verificar
     * @return true si se verificó correctamente
      */
-    public boolean validar(int cuenta, String pass) {
-        return (this.cuenta == cuenta) && (this.pass.equals(pass));
+    public boolean validar(String cuenta, String pass) {
+		if(cuenta == null || pass == null) return false;
+        return (this.cuenta.equals(cuenta)) && (this.pass.equals(pass));
     }
 
 	public String getNombre(){
@@ -35,7 +36,7 @@ public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
 		return pass;
 	}
 
-	public int getCuenta(){
+	public String getCuenta(){
 		return cuenta;
 	}
 	/**
@@ -43,7 +44,7 @@ public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
      * @return la serialización del registro en una línea de texto.
      */
     public String serializa(){
-		return String.format("%s\t%s\t%d",nombre,pass,cuenta);
+		return String.format("%s\t%s\t%s\n",nombre,pass,cuenta);
     }
 
 	
@@ -63,16 +64,12 @@ public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
 	if(params.length != 3)
 	    throw new ExcepcionRegistroInvalido();
 
-	try{
-	    nombre = params[0];
-	    pass = params[1];
-	    cuenta = Integer.parseInt(params[2]);
-	} catch (NumberFormatException nfe){
-	    throw new ExcepcionRegistroInvalido();
-	}
+	nombre = params[0];
+	pass = params[1];
+	cuenta = params[2];
     }
 
-    public void actualiza(Registro registro){
+    public void actualiza(Cuenta registro){
 	if(!(registro instanceof Cuenta))
 	    throw new ExcepcionRegistroInvalido();
 
@@ -81,18 +78,6 @@ public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
 	this.pass = cuenta.pass;
 	this.cuenta = cuenta.cuenta;
     }
-
-
-	/**
-     * Actualiza los valores del registro con los del registro recibido.
-     * @param registro el registro con el cual actualizar los valores.
-     * @throws ClassCastException si el registro no es de la instancia correcta.
-     */
-	@Override
-	public void actualiza(Cuenta registro) {
-		// TODO Auto-generated method stub
-		
-	}
 
     /**
      * Nos dice si el registro caza el valor dado en el campo especificado.
@@ -113,9 +98,9 @@ public class Cuenta implements IProxy, Registro<Cuenta,CampoCuenta>{
 			case PASS: // No se puede buscar por contraseña
 				return false;
 			case CUENTA:
-				if(valor instanceof Integer){
-					int cuenta = (int)valor;
-					return cuenta == getCuenta();
+				if(valor instanceof String){
+					String cuenta = (String)valor;
+					return cuenta.equals(getCuenta());
 				}break;
 		}
 		return false;

@@ -47,9 +47,9 @@ public class Ingrediente {
 
         registro = registro.trim();
         String[] campos = registro.split("-");
-	System.out.println("Campos <- " + campos.length);
-	for(int i = 0; i < campos.length; i++)
-	System.out.println("Ingrediente deserializa" + campos[i]);
+	//System.out.println("Campos <- " + campos.length);
+	//for(int i = 0; i < campos.length; i++)
+	//System.out.println("Ingrediente deserializa" + campos[i]);
         if(campos.length != 3){
             throw new ExcepcionRegistroInvalido("Registro no válido.");
         }

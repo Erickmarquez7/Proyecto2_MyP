@@ -9,8 +9,6 @@ import java.util.LinkedList;
  * @author Deloya Andrade Ana Valeria
  * @author Lopez Balcazar Fernando
  */
-
-
 public class Receta implements Registro<Receta,CampoBuscador>{
 
     private String nombre;
@@ -118,7 +116,7 @@ public class Receta implements Registro<Receta,CampoBuscador>{
      */
     @Override
     public String serializa() {
-        return String.format("%s/%s/%s/%d/%d",nombre,serializaIngredientes(),
+        return String.format("%s/%s/%s/%d/%d\n",nombre,serializaIngredientes(),
         serializaInstrucciones(),tiempo, dificultad);
     }
 
@@ -161,8 +159,6 @@ public class Receta implements Registro<Receta,CampoBuscador>{
         registro = registro.trim();
         String[] params = registro.split("/");
 
-	System.out.println("Cheto" + params.length);
-	for(int i = 0; i < params.length; i++) System.out.println(params[i]);
         if(params.length != 5)
             throw new ExcepcionRegistroInvalido("Número de parámetros no válido.");
 
@@ -189,12 +185,13 @@ public class Receta implements Registro<Receta,CampoBuscador>{
         ingredientes = new LinkedList<Ingrediente>();
         ings = ings.trim();
         String[] ingr = ings.split(",");
-	System.out.println(ingr.length);
+	//System.out.println(ingr.length);
         for(String e : ingr){
 	    Ingrediente aux = new Ingrediente(null,null,0.0,0);
 	    aux.deserializa(e);
             ingredientes.add(aux);
-	System.out.println(e);}
+	    //System.out.println(e);
+	}
     }
 
 
@@ -269,6 +266,14 @@ public class Receta implements Registro<Receta,CampoBuscador>{
         for(String q : instrucciones)
             s += "\n\t\t> " + q;
 
+        s +="\n\tTiempo estimado de preparación: ";
+        int horas = tiempo/60;
+        String plural = horas == 1 ? "hr" : "hrs";
+        if(horas > 0)
+            s += String.format("%d %s %d min", horas, plural, tiempo%60);
+        else
+            s += String.format("%d min", tiempo);
+
         if(dificultad > 5)
             dificultad = 5;
         else if(dificultad < 0)
@@ -277,15 +282,7 @@ public class Receta implements Registro<Receta,CampoBuscador>{
         for(int i = 0; i < dificultad; i++)
             s+= "*";
 
-        s +="\n\tTiempo estimado de preparación: ";
-        int horas = tiempo/60;
-        String plural = horas == 1 ? "hr" : "hrs";
-        if(horas > 0)
-            s += String.format("%d %s %d min\n", horas, plural, tiempo%60);
-        else
-            s += String.format("%d min\n", tiempo);
-
-        return s;
+        return s+"\n";
     }
 
 
@@ -302,12 +299,12 @@ public class Receta implements Registro<Receta,CampoBuscador>{
         switch(campo){
             case NOMBRE:
                 if(valor instanceof String){
-                    String nombre = (String)valor;
-                    return getNombre().contains(nombre) && !nombre.equals("");
+                    String nombre = ((String)valor).toLowerCase();
+                    return getNombre().toLowerCase().contains(nombre) && !nombre.equals("");
                 }break;
             case INGREDIENTES:
                 if(valor instanceof String){
-                    return cazaIngredientes((String)valor);
+                    return cazaIngredientes(((String)valor).toLowerCase());
                 }break;
             case INSTRUCCIONES: // Este buscador no se va a aplicar
                 if(valor instanceof String){
