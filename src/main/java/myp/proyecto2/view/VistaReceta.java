@@ -5,29 +5,27 @@ import myp.proyecto2.model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+/**
+ * Vista Receta para que te muestre una receta en especifico
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 
 public class VistaReceta extends JPanel{
     private JFrame frame;
-
-//    private JLabel texto;
-
-//    private int cantidad;
-
+    //proxy para validar los datos
+    private VistaProxy proxy = new VistaProxy();
+    //boton para pedir la receta
     private JButton pedir;
-
+    //la receta en especifico
     private static Receta receta;
 
-//    private JButton pedir;
-//    private JButton botonBuscarRecetas;
 
     public VistaReceta(){
         initDisplay();
         initBoton();
         frame.setLayout(null);
-    }
-
-    public static void setReceta(Receta receta2){
-        receta = receta2;
     }
 
 
@@ -39,13 +37,16 @@ public class VistaReceta extends JPanel{
         frame.setLayout(null);
     }
 
+    
+    /**
+     * Incializa la pantalla así como el texto
+     * y los campos de texto
+     */
     public void initDisplay(){
         frame = new JFrame("Cheems Ramsay");
         frame.setSize(800, 600);
         frame.setLocation(200,200);
 
-        JScrollBar scrollbar = new JScrollBar(JScrollBar.VERTICAL,30,40,0,500);
-        frame.getContentPane().add(scrollbar, BorderLayout.EAST);
         frame.getContentPane().setBackground(new Color(204,229,255));
 
         if(receta == null){
@@ -61,7 +62,7 @@ public class VistaReceta extends JPanel{
         //Se muestra el nombre
         JLabel name = new JLabel(receta.getNombre());
         name.setFont(new Font("Arial", Font.BOLD, 20));
-        name.setBounds(100,30,600,30);
+        name.setBounds(100,20,600,35);
         frame.add(name);
 
         // Se añaden los ingredintes
@@ -119,7 +120,7 @@ public class VistaReceta extends JPanel{
             dificultad.setFont(new Font("Courier", Font.BOLD, 22));
             dificultad.setBounds(250 + i*30, altura+5, 30,20);
             frame.add(dificultad);
-        }       
+        }  
     }
 
 
@@ -135,6 +136,10 @@ public class VistaReceta extends JPanel{
         frame.add(pedir);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
+	    pedir.addActionListener(e -> {
+	        proxy.setVisible(true);
+
+	    });
     }
 
     

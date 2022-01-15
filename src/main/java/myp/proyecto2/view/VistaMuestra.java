@@ -9,19 +9,24 @@ import myp.proyecto2.model.RecetarioCheems;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * Vista para las que muestre todas las recetas de una busqueda o en general
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 public class VistaMuestra extends JPanel{
 
-    private LinkedList<Receta> recetas = new LinkedList<>();
-
+    private JFrame frame; 
+    //para mostrar un receta en especifico 
     VistaReceta muestra;
+    //para saber cual es la
     private Receta parametro;
-
-    private JFrame frame;
 
     private JLabel texto;
 
-    private int cantidad = 10;
+    private LinkedList<Receta> recetas = new LinkedList<>();
+
 
 //    private JButton botonVerRecetas;
 //    private JButton botonBuscarRecetas;
@@ -30,16 +35,22 @@ public class VistaMuestra extends JPanel{
         RecetarioCheems recetario = new RecetarioCheems();
         recetas = recetario.getRecetas();
         initDisplay();
-        initBoton();
+        //initBoton();
         frame.setLayout(null);
     }
 
     public VistaMuestra(LinkedList<Receta> recetas){
         this.recetas = recetas;
         initDisplay();
-        initBoton();
+        frame.setLayout(null);
+        //initBoton();
     }
 
+
+    /**
+     * Incializa la pantalla así como el texto
+     * y los campos de texto
+     */
     public void initDisplay(){
         frame = new JFrame("Cheems Ramsay");
         frame.setBackground(Color.CYAN);
@@ -83,47 +94,26 @@ public class VistaMuestra extends JPanel{
 
             botonReceta.addActionListener(e -> {
                 parametro = r;
-                VistaReceta.setReceta(r);
                 muestra = new VistaReceta(r);
                 muestra.setVisible(true);
             });
         }
-        //int i = 100;
-        /*
-        for(int i = 0; i < cantidad; i++){
-            JLabel receta = new JLabel("Receta " + i);
-            receta.setFont(new Font("Courier", Font.ITALIC, 20));
-            receta.setBounds(150, 100+(i*30),300,30);
-            frame.add(receta);
-            
-            JButton botonReceta = new JButton("Ver receta");
-            botonReceta.setFont(new Font("Courier", Font.ITALIC,20));
-            botonReceta.setBounds(450,100+(i*30),300,30);
-            frame.add(botonReceta);
-
-            botonReceta.addActionListener(e -> {
-                System.out.println("Ver la receta ");
-            });
-
-        }
-        */
-
     }
 
-    private void verReceta(Receta receta){
 
-    }
-
+    /**
+     * Cambia las recetas que queremos mostrar
+     * @param recetas las nuevas recetas a mostrar
+     */
     public void setRecetas(LinkedList<Receta> recetas){
         this.recetas = recetas;
     }
 
 
-    public void initBoton(){
-
-
-    }
-
+    /**
+     * Cambia la visibilidad del frame
+     * @param bln el valor de la visibilidad del frame
+     */   
     public void setVisible(boolean bln){
         frame.setVisible(bln);
     }

@@ -3,17 +3,24 @@ package myp.proyecto2.view;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+/**
+ * Vista principal, la que se va a mostrar iniciando el programa
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 public class VistaPrincipal extends JPanel{
+
     private JFrame frame;
 
     private JLabel texto;
-
+    //los difrentes botones del menu
     private JButton botonVerRecetas;
     private JButton botonBuscarRecetas;
 
     private JButton botonSuscribir;
     private JButton botonAddReceta;
+
 
     
     public VistaPrincipal(){
@@ -24,6 +31,10 @@ public class VistaPrincipal extends JPanel{
     }
 
     
+    /**
+     * Incializa la pantalla así como el texto
+     * y los campos de texto
+     */    
     public void initDisplay(){
         frame = new JFrame("Cheems Ramsay");
         frame.setSize(800, 600);
@@ -53,7 +64,9 @@ public class VistaPrincipal extends JPanel{
 
     }
 
-
+    /**
+     * Inicializa la funcionalidad de los botones 
+     */
     public void initBoton(){
         botonVerRecetas = new JButton("Ver todas las recetas");
         botonVerRecetas.setBounds(200,350,400,50);
@@ -89,11 +102,13 @@ public class VistaPrincipal extends JPanel{
     }
 
 
+
     public void function(ActionListener verRecetas, ActionListener buscarRecetas, 
     ActionListener suscribe, ActionListener addreceta){
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
         botonVerRecetas.addActionListener(verRecetas);
+        //botonVerRecetas.addActionListener(e ->{frame = new Ejemplo7b();});
         botonBuscarRecetas.addActionListener(buscarRecetas);
 
         botonSuscribir.addActionListener(suscribe);
@@ -102,6 +117,9 @@ public class VistaPrincipal extends JPanel{
     }
 
 
+    /**
+     * Cambia las propiedades del frame a mostrar
+     */
     public void initPantalla(){
         /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
         el thread que maneja la ventana realmente termine su ejecucion*/
@@ -114,8 +132,24 @@ public class VistaPrincipal extends JPanel{
     }
 
     
+    /**
+     * Cambia la visibilidad del frame
+     * @param bln el valor de la visibilidad del frame
+     */   
     public void setVisible(boolean bln){
         frame.setVisible(bln);
     }
+
+    
+	public void function(ActionListener verRecetas, ActionListener buscarRecetas,
+			ActionListener suscribe) {
+                       
+        botonVerRecetas.addActionListener(verRecetas);
+        //botonVerRecetas.addActionListener(e ->{frame = new Ejemplo7b();});
+        botonBuscarRecetas.addActionListener(buscarRecetas);
+
+        botonSuscribir.addActionListener(suscribe);
+
+	}
 
 }

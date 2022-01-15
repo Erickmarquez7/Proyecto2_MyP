@@ -3,24 +3,36 @@ package myp.proyecto2.view;
 //Bibliotecas para la ventana y para eventos.
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.util.LinkedList;
 
-import myp.proyecto2.model.Buscador;
-import myp.proyecto2.model.PorNombre;
 import myp.proyecto2.model.*;
-import myp.proyecto2.model.RecetarioCheems;
+/**
+ * Vista para las diferentes formas de buscar una receta
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 
 public class VistaBuscador extends JPanel{
     private JFrame frame;
     
     private JLabel texto;
-
+    //buscador para las diferentes formas de buscar, aqui implmentamos strategy
     private Buscador buscador;
-    private VistaBusqueda vista;
+    //para mostrar las recetas obtenidas
+    private VistaMuestra mostrador;
+    //Campo de busqueda
+    private JTextField busqueda;
+    //private VistaBusqueda vista;
     private JButton botonNombre;
     private JButton botonDificultad;
     private JButton botonTiempo;
     private JButton botonIngredientes;
+    private JButton ok;
+
+    private Recetario recetario;
+    //botones para las recetas encontradas
+    private LinkedList<JButton> botones;
 
     public VistaBuscador(){
         initDisplay();
@@ -29,7 +41,13 @@ public class VistaBuscador extends JPanel{
         //initPantalla();
     }
 
+
+    /**
+     * Incializa la pantalla así como el texto
+     * y los campos de texto
+     */
     public void initDisplay(){
+        recetario = new RecetarioCheems();
         frame = new JFrame("Cheems Ramsay");
         frame.setSize(800, 600);
         frame.setLocation(200,200);
@@ -41,78 +59,133 @@ public class VistaBuscador extends JPanel{
         //el primer parametro lo mueve en linea horizontal a la derecha
         //el segundo en vertical abajo
         //
-        texto.setBounds(200,100,600,100);
+        texto.setBounds(200,80,600,100);
         frame.add(texto);
+
+        busqueda = new JTextField();
+        busqueda.setBounds(120,200,470,50);
+        busqueda.setFont(new Font("Courier", Font.ITALIC, 18));
+        frame.add(busqueda);
     }
 
+
+    /**
+     * Inicializa la funcionalidad de los botones 
+     */
     public void initBoton(){
+        botones = new LinkedList<>();
+
         botonNombre = new JButton("Buscar por nombre");
-        botonNombre.setBounds(150,220,250,80);
+        botonNombre.setBounds(150,300,250,80);
         botonNombre.setFont(new Font("Courier", Font.BOLD, 20));
         //Se agrega al frame
+        botones.add(botonNombre);
         frame.add(botonNombre);
-        /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
-        botonNombre.addActionListener(e ->{
-            buscador = new PorNombre();
-            Recetario recetario = new RecetarioCheems();
-            for(Receta r : buscador.busca("uevo", recetario))
-            System.out.println(r.toString());
-        });
-
-
+        
 
         botonDificultad = new JButton("Por Dificultad");
-        botonDificultad.setBounds(400,220,250,80);
+        botonDificultad.setBounds(400,300,250,80);
         botonDificultad.setFont(new Font("Courier", Font.BOLD, 20));
         //Se agrega al frame
         frame.add(botonDificultad);
-        /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
-
+        botones.add(botonDificultad);
+        
 
         botonTiempo = new JButton("Por tiempo");
-        botonTiempo.setBounds(150,300,250,80);
+        botonTiempo.setBounds(150,380,250,80);
         botonTiempo.setFont(new Font("Courier", Font.BOLD, 20));
         //Se agrega al frame
         frame.add(botonTiempo);
-        /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
-
+        botones.add(botonTiempo);
+        
 
         botonIngredientes = new JButton("Por Ingredientes");
-        botonIngredientes.setBounds(400,300,250,80);
+        botonIngredientes.setBounds(400,380,250,80);
         botonIngredientes.setFont(new Font("Courier", Font.BOLD, 20));
         //Se agrega al frame
         frame.add(botonIngredientes);
+        botones.add(botonIngredientes);
+
+
+        ok = new JButton("Buscar");
+        ok.setBounds(600,200,150,50);
+        ok.setFont(new Font("Courier", Font.BOLD, 20));
+        frame.add(ok);
         /*Se le asigna un ActionListener que permitira actuar
-        de cierta forma cuando se presione el boton*/
+        de cierta forma cuando se presione el boton
+        en este caso por nombre
+        */
+        botonNombre.addActionListener(e ->{
+            buscador = new PorNombre();
+            colorBotones();
+            botonNombre.setBackground(Color.PINK);
+        });
+        /*Se le asigna un ActionListener que permitira actuar
+        de cierta forma cuando se presione el boton
+        en este caso por dificultad
+        */
+        botonDificultad.addActionListener(e ->{
+            buscador = new PorDificultad();
+            colorBotones();
+            botonDificultad.setBackground(Color.PINK);
+        });
+        /*Se le asigna un ActionListener que permitira actuar
+        de cierta forma cuando se presione el boton
+        en este caso por tiempo
+        */
+        botonTiempo.addActionListener(e ->{
+            buscador = new PorTiempo();
+            colorBotones();
+            botonTiempo.setBackground(Color.PINK);
+        });
+        /*Se le asigna un ActionListener que permitira actuar
+        de cierta forma cuando se presione el boton
+        en este caso por ingredientes
+        */
+        botonIngredientes.addActionListener(e ->{
+            buscador = new PorIngredientes();
+            colorBotones();
+            botonIngredientes.setBackground(Color.PINK);
+        });
 
+        /*Se le asigna un ActionListener que permitira actuar
+        de cierta forma cuando se presione el boton
+        */
+        ok.addActionListener(e -> {
+            String buscar = busqueda.getText();
+            if(buscar.equals("")){
+                frame = new VistaMensaje("       Campo vacíos", Color.RED);
+            }else{
+                if(buscador == null)
+                    frame = new VistaMensaje("Buscador no seleccionado", new Color(198,61,26));
+                else{
+                    LinkedList<Receta> resul = buscador.busca(buscar, recetario);
+                    if(resul == null)
+                        frame = new VistaMensaje("  Debe ingresar un número", Color.RED);
+                    else{
+                            mostrador = new VistaMuestra(resul);
+                    mostrador.setVisible(true);
+                    }
+                }
+            }
+        });
     }
 
 
-    public void function(ActionListener nombre, ActionListener dificultad,
-    ActionListener tiempo, ActionListener ingredientes){
-        botonNombre.addActionListener(nombre);
-        botonDificultad.addActionListener(dificultad);
-        botonTiempo.addActionListener(tiempo);
-        botonIngredientes.addActionListener(ingredientes);
-
+    /**
+     * Solo colorea los botones, una funcionalidad inutil y que nos llevó vario tiempo
+     * buscando en internet para saber como se hacia pero que se ve bonito
+     */
+    public void colorBotones(){
+        for(JButton b : botones)
+            b.setBackground(new Color(238,238,238));
     }
 
 
-    public void initPantalla(){
-        /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
-        el thread que maneja la ventana realmente termine su ejecucion*/
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*Esta linea determina que toda la disposicion de los elementos
-        (donde se ubicaran) depende completamente de nosotros.*/
-        frame.setLayout(null);
-        //Se asigna al frame como visible
-        frame.setVisible(true);
-    }
-
-    
+    /**
+     * Cambia la visibilidad del frame
+     * @param bln el valor de la visibilidad del frame
+     */   
     public void setVisible(boolean bln){
         frame.setVisible(bln);
     }

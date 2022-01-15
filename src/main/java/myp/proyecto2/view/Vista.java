@@ -1,4 +1,5 @@
 package myp.proyecto2.view;
+
 import myp.proyecto2.controller.Controlador;
 import myp.proyecto2.model.Buscador;
 /**
@@ -7,7 +8,6 @@ import myp.proyecto2.model.Buscador;
  * @author Deloya Andrade Ana Valeria
  * @author Lopez Balcazar Fernando
  */
-
 public class Vista {
 
     public Vista(){
@@ -16,12 +16,11 @@ public class Vista {
         VistaBuscador buscador = new VistaBuscador();
         VistaMuestra muestra = new VistaMuestra();
 
-
         VistaProxy proxy = new VistaProxy();
         VistaReceta receta = new VistaReceta();
 
         VistaUsuario usuario = new VistaUsuario();
-        VistaAnade anade = new VistaAnade();
+        
 
         //le añadimos funcionalidad a los botones de las vistas
         //a través de las poderosisimas y mamadisimas lambas 
@@ -36,17 +35,8 @@ public class Vista {
 
             e -> {
                 System.out.println("Suscribir usuario");
-                usuario.setVisible(true);},
-
-            e -> {
-                System.out.println("Añadir recetas");
-                anade.setVisible(true);}
-            
+                usuario.setVisible(true);}
         );
-
-
-        //muestra.function();
-
 
         receta.function(e -> {
             System.out.println("Proxy");
@@ -58,10 +48,9 @@ public class Vista {
             System.out.println("Usuario agregado");
             ;}
         );
-
         //anade.function();
 
-        new Controlador(principal, muestra, buscador, proxy, receta, usuario, anade);
+        new Controlador(principal, muestra, buscador, proxy, receta, usuario);
     }
 
 }

@@ -2,9 +2,22 @@ package myp.proyecto2.view;
 
 //Bibliotecas para la ventana y para eventos.
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.util.Arrays;
+import java.util.LinkedList;
 
+import myp.proyecto2.model.Proxy;
+import myp.proyecto2.model.IProxy;
+import myp.proyecto2.model.Cuenta;
+import myp.proyecto2.model.BaseDatosCuentas;
+import myp.proyecto2.model.CampoCuenta;
+
+import java.awt.*;
+/**
+ * Vista proxy para valida la informacion del ususario
+ * @author Bernal Marquez Erick
+ * @author Deloya Andrade Ana Valeria
+ * @author Lopez Balcazar Fernando
+ */
 public class VistaProxy extends JPanel{
 
 	/*Este es el canvas donde se agregan todos los elementos 
@@ -27,13 +40,26 @@ public class VistaProxy extends JPanel{
     (como presionar el boton)*/
     private JButton boton1;
 
+    //proxy para la validacion de datos
+    private IProxy proxy;
+
+    /* La base de datos de las cuentas asociadas al sitio. */
+    private BaseDatosCuentas base = new BaseDatosCuentas();
+
+
     public VistaProxy(){
     	initDisplay();
     	initBoton();
+        frame.setLayout(null);
     	//initPantalla();
         //this.getContentPane().setBackground(Color.RED);
     }
 
+
+    /**
+     * Incializa la pantalla así como el texto
+     * y los campos de texto
+     */
     public void initDisplay(){
     	frame = new JFrame("Cheems Ramsay");
         //frame.setBackground(Color.CYAN);
@@ -76,35 +102,69 @@ public class VistaProxy extends JPanel{
         frame.add(contrafield);
     }
 
+
+    /**
+     * Inicializa la funcionalidad de los botones 
+     */
     public void initBoton(){
     	//Se agrega un boton con un mensaje
         boton1 = new JButton("OK");
+
         //Se asigna su posicion y su dimension. Los parametros son (x,y,ancho,alto)
-        boton1.setBounds(550,400,150,50);
+        boton1.setBounds(50,400,100,100);
+
         boton1.setFont(new Font("Arial", Font.BOLD, 30));
         //Se agrega al frame
         frame.add(boton1);
         /*Se le asigna un ActionListener que permitira actuar
         de cierta forma cuando se presione el boton*/
         boton1.addActionListener(e -> {
-	    System.out.println(textofield.getText());
-            System.out.println("Poner el if y mostrar un mensaje de exito o nel, usar prozy");
-        });
-    }
+            System.out.println(contrafield.getPassword());
+            System.out.println(textofield.getText());
+            base.carga("src/main/java/myp/proyecto2/data/");
+            
+            //sacamos las cuenta
+            LinkedList<Cuenta> cuentas = base.buscaRegistros(CampoCuenta.CUENTA, textofield.getText());
+            for(Cuenta c : base.getRegistros())
+                System.out.println(c.getCuenta());
+            //sacamos la cuenta
+            Cuenta cuenta  = cuentas.isEmpty() ? null : cuentas.getFirst();
 
+            
+            //verificamos que la cuenta no sea null
+            if(cuenta != null){
+                //en caso de no ser null la pasamos al proxy
+                proxy = new Proxy(cuenta);
+                //lo validamos con el proxy
+                if(proxy.validar(cuenta.getCuenta(), new String(contrafield.getPassword()) )){
+                    frame = new VistaMensaje("   Su pedido va en camino", Color.BLUE);
+                    textofield.setText("");
+                    contrafield.setText("");
+                }
+                //en caso de que los campos ambos campos sean correctos imprimos el mensaje valido
+                //false en otro caso
+                else{
+                frame = new VistaMensaje("Datos de cuenta inválidos", Color.RED);
+                System.out.println("Entra en el else");
+                contrafield.setText("");
+                }
 
-    public void initPantalla(){
-        /*Esta linea sirve para que al cerrar la ventana de la interfaz, 
-        el thread que maneja la ventana realmente termine su ejecucion*/
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*Esta linea determina que toda la disposicion de los elementos
-        (donde se ubicaran) depende completamente de nosotros.*/
-        frame.setLayout(null);
-        //Se asigna al frame como visible
-        frame.setVisible(true);
+            }else{
+                System.out.println("Cuenta nula");
+                frame = new VistaMensaje("   Cuenta no encontrada", Color.RED);
+            }
+        }   
+        
+        );
+        
     }
+    
 
     
+    /**
+     * Cambia la visibilidad del frame
+     * @param bln el valor de la visibilidad del frame
+     */   
     public void setVisible(boolean bln){
         frame.setVisible(bln);
     }
